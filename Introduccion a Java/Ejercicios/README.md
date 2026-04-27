@@ -4,8 +4,5 @@ Ejercicios de [Introduccion a Java.pdf](Introducción_a_Java.pdf)
 - [x] [EJERCICIO 2](Ejer2Iniciacion.java) Dado un número, determinar cuántos dígitos tiene. No se pueden utilizar ni variables ni funciones de tipo String. 
 - [x] [EJERCICIO 3](Ejer3Iniciacion.java) Escribir un programa que pida números enteros hasta que se introduzca un valor menor o igual a cero. A continuación debe mostrar la suma total de dichos números. Se deben incluir todos los números que hemos ido introduciendo por teclado. No se pueden utilizar Arrays.
 > [!NOTE]
-> **Detalles de la implementación:**
-> - He implementado la lógica para descomponer cada número.
-> - Se compara su cantidad de dígitos con la suma de los mismos.
-> - El programa procesa la secuencia en tiempo real.
+> &nbsp;&nbsp;&nbsp;&nbsp; He optimizado el programa: ahora admite números positivos y negativos, y muestra la suma total de forma textual y algebraica.
 - [ ] Dada una secuencia de números enteros acabada en 0, obtener la suma de aquellos números tales que su número de cifras sea igual a la suma de las mismas. No se pueden utilizar Arrays.
