@@ -34,7 +34,8 @@ public class Ejer2Iniciacion {
             digitosN = 1; // Caso especial para el cero
 
         // imprimimos los resultados
-        System.out.println("\n Numero [" + numOriginal + "] tiene (" + digitosN + ") digitos.");
+        System.out.println("\n Numero [" + numOriginal + "] tiene "
+                + (digitosN == 1 ? "solo uno digito." : "(" + digitosN + ") digitos."));
 
         System.out.println("\n- FIN DEL EJERCICIO -\n");
 
