@@ -1,4 +1,4 @@
-Ejercicios Iniciación JAVA
+Ejercicios Iniciación JAVA de [Introduccion a Java.pdf](Introducción a JAVA.pdf)
 
 - [EJERCICIO 1](Ejer1Iniciacion.java) Leer una cantidad ‘N’ y luego introducir ‘N’ números enteros. Se pide imprimir el mayor y el menor y las veces que aparece cada uno.
 - Dado un número, determinar cuántos dígitos tiene. No se pueden utilizar ni variables ni funciones de tipo String. 
