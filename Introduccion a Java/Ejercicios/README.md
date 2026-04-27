@@ -1,4 +1,5 @@
-Ejercicios de [Introduccion a Java.pdf](Introducción_a_Java.pdf)
+> [!NOTE]
+> Ejercicios de [Introduccion a Java.pdf](Introducción_a_Java.pdf)
 
 - [x] [EJERCICIO 1](Ejer1Iniciacion.java) Leer una cantidad ‘N’ y luego introducir ‘N’ números enteros. Se pide imprimir el mayor y el menor y las veces que aparece cada uno.
 - [x] [EJERCICIO 2](Ejer2Iniciacion.java) Dado un número, determinar cuántos dígitos tiene. No se pueden utilizar ni variables ni funciones de tipo String. 
