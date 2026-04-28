@@ -35,17 +35,17 @@ public class Ejer3Strings {
         for (int i = 0; i < texto.length(); i++) {
             char c = texto.charAt(i);
 
-           // Comprobamos si es el inicio de un nuevo token (palabra o número)
+            // Comprobamos si es el inicio de un nuevo token (palabra o número)
             if (Character.isLetterOrDigit(c) && !esToken) {
                 esToken = true;
-                
-               // Determinamos el tipo de token por su primer carácter
+
+                // Determinamos el tipo de token por su primer carácter
                 if (Character.isDigit(c)) {
                     contNumero++;
                 } else {
                     contPalabra++;
                 }
-            } 
+            }
 
             // Si el carácter no es alfanumérico, el token actual termina
             else if (!Character.isLetterOrDigit(c)) {
@@ -55,7 +55,9 @@ public class Ejer3Strings {
 
         // imprimimos el resultado
         System.out.println("--------------------");
-        System.out.println("La cadena [" + texto + "] contiene " + contPalabra + (contPalabra==1 ? " palabra" : " palabras") + " y "  + contNumero + (contNumero==1 ? " numero." : " numeros."));
+        System.out.println(
+                "La cadena [" + texto + "] contiene " + contPalabra + (contPalabra == 1 ? " palabra" : " palabras")
+                        + " y " + contNumero + (contNumero == 1 ? " numero." : " numeros."));
         System.out.println("--------------------");
 
         System.out.println("\n- FIN DEL EJERCICIO -\n");
