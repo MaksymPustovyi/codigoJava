@@ -20,14 +20,15 @@ public class Ejer3Iniciacion {
         // inicializamos el ejercicio
         System.out.println("\n- INICIO DEL EJERCICIO -\n");
 
-        boolean esPrimero = true; //veriable para verificar primero numero introducido
+        boolean esPrimero = true; // veriable para verificar primero numero introducido
 
         do {
             // leemos los numeros
             System.out.print("Introduce los numeros para sumar, cero para salir: ");
             num = entrada.nextInt();
 
-            // si es primero numero - contamos total, guardamos String(suma) sin symbolo "+" y cambiamos esPrimero a False
+            // si es primero numero - contamos total, guardamos String(suma) sin symbolo "+"
+            // y cambiamos esPrimero a False
             if (esPrimero) {
                 suma = "" + num;
                 total += num;
@@ -38,13 +39,14 @@ public class Ejer3Iniciacion {
                 total += num;
                 suma += "+" + num;
 
-            // si introducido < 0 - contamos total pero usamos symbolo negativo para añadir a String(suma)
+                // si introducido < 0 - contamos total pero usamos symbolo negativo para añadir
+                // a String(suma)
             } else if (num < 0) {
                 total += num;
                 suma += "" + num;
-            
-            // si introducido "0" - añadimos a String(suma) el symbolo "="
-            }else
+
+                // si introducido "0" - añadimos a String(suma) el symbolo "="
+            } else
                 suma += "=";
         } while (num != 0); // esperamos "0" para salir
 

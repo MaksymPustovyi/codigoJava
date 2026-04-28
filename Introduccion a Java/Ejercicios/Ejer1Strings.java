@@ -23,11 +23,13 @@ public class Ejer1Strings {
         System.out.println("--------------------");
         System.out.print("Resultado de la conversion: [");
 
-        // сonvertimos el String a un array y concatenamos un espacio a cada carácter y imprimimos resultado en una linea
+        // сonvertimos el String a un array y concatenamos un espacio a cada carácter y
+        // imprimimos resultado en una linea
         for (char letra : palabra.toCharArray()) {
             System.out.print(letra + " ");
         }
-        System.out.println("\b]"); // borra el último carácter sobrante (como un espacio o coma) y cierra el formato con ']'.
+        System.out.println("\b]"); // borra el último carácter sobrante (como un espacio o coma) y cierra el
+                                   // formato con ']'.
         System.out.println("--------------------");
 
         System.out.println("\n- FIN DEL EJERCICIO -\n");

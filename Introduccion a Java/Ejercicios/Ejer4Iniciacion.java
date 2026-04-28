@@ -4,7 +4,8 @@ import java.util.Scanner;
  * Pagina 184, Introducción a JAVA.pdf
  * Ejercicio 4
  * Dada una secuencia de números enteros acabada en 0,
- * obtener la suma de aquellos números tales que su número de cifras sea igual a la suma de las mismas.
+ * obtener la suma de aquellos números tales que su número de cifras sea igual a
+ * la suma de las mismas.
  * No se pueden utilizar Arrays.
  */
 
@@ -18,7 +19,7 @@ public class Ejer4Iniciacion {
         // inicializamos el ejercicio
         System.out.println("\n- INICIO DEL EJERCICIO -\n");
 
-       do {
+        do {
             System.out.print("Introduce numero positivo, cero para terminar: ");
             num = entrada.nextInt();
 
@@ -36,7 +37,7 @@ public class Ejer4Iniciacion {
                 textual += num + "+";
                 total += num;
             }
-       } while (num != 0);
+        } while (num != 0);
 
         // imprimimos los resultados
         System.out.println("--------------------");

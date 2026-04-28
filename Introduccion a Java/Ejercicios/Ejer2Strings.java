@@ -3,7 +3,8 @@ import java.util.Scanner;
 /**
  * Pagina 185, Introducción a JAVA.pdf
  * Ejercicio 2 Strings
- * Crea un programa en JAVA que reciba 5 palabras y luego nos muestre la que tiene una longitud mayor.
+ * Crea un programa en JAVA que reciba 5 palabras y luego nos muestre la que
+ * tiene una longitud mayor.
  */
 
 public class Ejer2Strings {
@@ -15,13 +16,16 @@ public class Ejer2Strings {
         // inicializamos el ejercicio
         System.out.println("\n- INICIO DEL EJERCICIO -\n");
 
-        for (int i=1; i<=5; i++) {
-        System.out.print("Introduce " + (i==1 ? "primera" : i==2 ? "segunda" : i==3 ? "tercera" : i==4 ? "cuarta" : "quinta") + " palabra: ");
-        palabra = entrada.nextLine(); // leemos una palabra del usuario
+        for (int i = 1; i <= 5; i++) {
+            System.out.print("Introduce "
+                    + (i == 1 ? "primera" : i == 2 ? "segunda" : i == 3 ? "tercera" : i == 4 ? "cuarta" : "quinta")
+                    + " palabra: ");
+            palabra = entrada.nextLine(); // leemos una palabra del usuario
 
-        // si la palabra actual es estrictamente más larga que la guardada, actualiza el valor.
-        if (palabra.length() > palabraMax.length())
-            palabraMax = palabra;
+            // si la palabra actual es estrictamente más larga que la guardada, actualiza el
+            // valor.
+            if (palabra.length() > palabraMax.length())
+                palabraMax = palabra;
 
         }
         // imprimimos el resultado
