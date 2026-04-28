@@ -11,5 +11,6 @@
 
 - [x] [EJERCICIO 1 Strings](Ejer1Strings.java) Crea un programa que te pida una palabra y escriba las letras separadas por espacios.
 - [x] [EJERCICIO 2 Strings](Ejer2Strings.java) Crea un programa en JAVA que reciba 5 palabras y luego nos muestre la que tiene una longitud mayor.
-- [ ] Crea un programa en JAVA que lea por teclado una cadena de texto e indique la cantidad de palabras que tiene. De la clase String, únicamente se pueden utilizar los métodos charAt(), trim() y length().
+- [x] [EJERCICIO 3 Strings](Ejer3Strings.java) Crea un programa en JAVA que lea por teclado una cadena de texto e indique la cantidad de palabras que tiene. De la clase String, únicamente se pueden utilizar los métodos charAt(), trim() y length().
+` EJERCICIO 3: He mejorado la lógica con un sistema de estados para ignorar espacios múltiples y símbolos, diferenciando además entre palabras y números.`
 - [ ] Crea un programa en JAVA que reciba una palabra por teclado e indique si es un palíndromo. Un palíndromo es una palabra que se lee igual de derecha a izquierda, que de izquierda a derecha. Ejemplo: RECONOCER
