@@ -5,4 +5,4 @@
 - [x] [EJERCICIO 2](Ejer2Iniciacion.java) Dado un número, determinar cuántos dígitos tiene. No se pueden utilizar ni variables ni funciones de tipo String. 
 - [x] [EJERCICIO 3](Ejer3Iniciacion.java) Escribir un programa que pida números enteros hasta que se introduzca un valor menor o igual a cero. A continuación debe mostrar la suma total de dichos números. Se deben incluir todos los números que hemos ido introduciendo por teclado. No se pueden utilizar Arrays.
 > **EJERCICIO 3:** He optimizado el programa: ahora admite números positivos y negativos, y muestra la suma total de forma textual y algebraica.
-- [ ] Dada una secuencia de números enteros acabada en 0, obtener la suma de aquellos números tales que su número de cifras sea igual a la suma de las mismas. No se pueden utilizar Arrays.
+- [x] [EJERCICIO 4](Ejer4Iniciacion.java) Dada una secuencia de números enteros acabada en 0, obtener la suma de aquellos números tales que su número de cifras sea igual a la suma de las mismas. No se pueden utilizar Arrays.
