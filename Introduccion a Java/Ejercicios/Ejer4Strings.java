@@ -34,7 +34,7 @@ public class Ejer4Strings {
 
         // imprimimos el resultado
         System.out.println("--------------------");
-        System.out.println("La palabra [" + palabraOriginal + "] " + (esPalindromo ? "ES un polindromo." : "NO es polindromo."));
+        System.out.println("La palabra [" + palabraOriginal.toUpperCase() + "] " + (esPalindromo ? "ES un polindromo." : "NO es polindromo."));
         System.out.println("--------------------");
 
         System.out.println("\n- FIN DEL EJERCICIO -\n");
