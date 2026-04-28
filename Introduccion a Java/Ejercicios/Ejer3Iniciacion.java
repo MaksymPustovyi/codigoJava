@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Pagina 184, Introducción a JAVA.pdf
- * Ejercicio 2
+ * Ejercicio 3
  * Escribir un programa que pida números enteros hasta que se introduzca un
  * valor menor o igual a cero.
  * A continuación debe mostrar la suma total de dichos números.
