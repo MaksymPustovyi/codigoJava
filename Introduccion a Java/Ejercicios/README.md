@@ -18,6 +18,6 @@
 
 # EJERCICIOS - FIGURAS
 
-- [ ] [EJERCICIO 1 Figuras](Ejer1Figuras.java) Crear un programa en JAVA que dibuje un rectángulo formado por asteriscos(*). Se deben pedir base y altura por teclado. Además, añade código adicional para que dibuje dicho rectángulo sin relleno
-- [ ] [EJERCICIO 2 Figuras](Ejer1Figuras.java) Crea un programa en JAVA que dibuje un triángulo rectángulo formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho triángulo sin relleno
-- [ ] [EJERCICIO 3 Figuras](Ejer1Figuras.java) Crea un programa en JAVA que dibuje un triángulo equilátero formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho rectángulo sin relleno
+- [x] [EJERCICIO 1 Figuras](Ejer1Figuras.java) Crear un programa en JAVA que dibuje un rectángulo formado por asteriscos(*). Se deben pedir base y altura por teclado. Además, añade código adicional para que dibuje dicho rectángulo sin relleno
+- [x] [EJERCICIO 2 Figuras](Ejer2Figuras.java) Crea un programa en JAVA que dibuje un triángulo rectángulo formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho triángulo sin relleno
+- [x] [EJERCICIO 3 Figuras](Ejer3Figuras.java) Crea un programa en JAVA que dibuje un triángulo equilátero formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho rectángulo sin relleno
