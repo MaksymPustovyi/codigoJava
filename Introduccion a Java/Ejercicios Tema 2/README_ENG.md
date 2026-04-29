@@ -1,30 +1,31 @@
+###### Topic 2 Exercises
 <div align="right">
 
-<kbd> [ 📂 MAIN MENU ](../README.md) </kbd> <kbd> [ :gear: CAMBIAR IDIOMA :spain: ](./README.eng) </kbd>
+<kbd> [ 📂 MAIN MENU ](../README.md) </kbd> <kbd> [ :gear: CAMBIAR IDIOMA :es: ](./README.eng) </kbd>
 
 </div>
 
-## EJERCICIOS DE INICIACION
+## INTRODUCTORY EXERCISES
 
-- [x] [EJERCICIO 1 Inicio](Ejer1Iniciacion.java) Leer una cantidad ‘N’ y luego introducir ‘N’ números enteros. Se pide imprimir el mayor y el menor y las veces que aparece cada uno.
-- [x] [EJERCICIO 2 Inicio](Ejer2Iniciacion.java) Dado un número, determinar cuántos dígitos tiene. No se pueden utilizar ni variables ni funciones de tipo String. 
-- [x] [EJERCICIO 3 Inicio](Ejer3Iniciacion.java) Escribir un programa que pida números enteros hasta que se introduzca un valor menor o igual a cero. A continuación debe mostrar la suma total de dichos números. Se deben incluir todos los números que hemos ido introduciendo por teclado. No se pueden utilizar Arrays.
-<br/>💡 He optimizado el programa: ahora admite números positivos y negativos, y muestra la suma total de forma textual y algebraica.
-- [x] [EJERCICIO 4 Inicio](Ejer4Iniciacion.java) Dada una secuencia de números enteros acabada en 0, obtener la suma de aquellos números tales que su número de cifras sea igual a la suma de las mismas. No se pueden utilizar Arrays.
+- [x] [EXERCISE 1 Intro](Ejer1Iniciacion.java) Read a quantity 'N' and then input 'N' integers. Print the maximum and minimum values and the number of times each one appears.
+- [x] [EXERCISE 2 Intro](Ejer2Iniciacion.java) Given a number, determine how many digits it has. String variables or functions cannot be used.
+- [x] [EXERCISE 3 Intro](Ejer3Iniciacion.java) Write a program that asks for integers until a value less than or equal to zero is entered. Then, display the total sum of these numbers. All numbers entered must be included. Arrays cannot be used.
+<br/>💡 I have optimized the program: it now supports both positive and negative numbers and displays the total sum in both textual and algebraic formats.
+- [x] [EXERCISE 4 Intro](Ejer4Iniciacion.java) Given a sequence of integers ending in 0, obtain the sum of those numbers where the number of digits is equal to the sum of the digits. Arrays cannot be used.
 
-## EJERCICIOS DE STRINGS
+## STRING EXERCISES
 
-- [x] [EJERCICIO 1 Strings](Ejer1Strings.java) Crea un programa que te pida una palabra y escriba las letras separadas por espacios.
-- [x] [EJERCICIO 2 Strings](Ejer2Strings.java) Crea un programa en JAVA que reciba 5 palabras y luego nos muestre la que tiene una longitud mayor.
-- [x] [EJERCICIO 3 Strings](Ejer3Strings.java) Crea un programa en JAVA que lea por teclado una cadena de texto e indique la cantidad de palabras que tiene. De la clase String, únicamente se pueden utilizar los métodos charAt(), trim() y length().
-<br/>💡 He mejorado la lógica con un sistema de estados para ignorar espacios múltiples y símbolos, diferenciando además entre palabras y números.
-- [x] [EJERCICIO 4 Strings](Ejer4Strings.java) Crea un programa en JAVA que reciba una palabra por teclado e indique si es un palíndromo. Un palíndromo es una palabra que se lee igual de derecha a izquierda, que de izquierda a derecha. Ejemplo: RECONOCER
-<br>💡 He añadido trim() y toLowerCase() para normalizar la entrada, ignorando espacios laterales y la diferencia entre mayúsculas y minúsculas.
+- [x] [EXERCISE 1 Strings](Ejer1Strings.java) Create a program that prompts for a word and prints its letters separated by spaces.
+- [x] [EXERCISE 2 Strings](Ejer2Strings.java) Create a JAVA program that receives 5 words and displays the one with the greatest length.
+- [x] [EXERCISE 3 Strings](Ejer3Strings.java) Create a JAVA program that reads a text string and indicates the number of words it contains. Only the methods charAt(), trim(), and length() from the String class may be used.
+<br/>💡 I have improved the logic using a state system to ignore multiple spaces and symbols, while also differentiating between words and numbers.
+- [x] [EXERCISE 4 Strings](Ejer4Strings.java) Create a JAVA program that receives a word and indicates whether it is a palindrome. A palindrome is a word that reads the same forwards and backwards. Example: RECONOCER.
+<br>💡 I have added trim() and toLowerCase() to normalize input, ignoring leading/trailing spaces and case sensitivity.
 
-## EJERCICIOS DE FIGURAS
+## SHAPES EXERCISES
 
-- [x] [EJERCICIO 1 Figuras](Ejer1Figuras.java) Crear un programa en JAVA que dibuje un rectángulo formado por asteriscos(*). Se deben pedir base y altura por teclado. Además, añade código adicional para que dibuje dicho rectángulo sin relleno
-- [x] [EJERCICIO 2 Figuras](Ejer2Figuras.java) Crea un programa en JAVA que dibuje un triángulo rectángulo formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho triángulo sin relleno
-- [x] [EJERCICIO 3 Figuras](Ejer3Figuras.java) Crea un programa en JAVA que dibuje un triángulo equilátero formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho rectángulo sin relleno
+- [x] [EXERCISE 1 Shapes](Ejer1Figuras.java) Create a JAVA program that draws a rectangle made of asterisks (*). Base and height must be requested from the user. Additionally, include code to draw the rectangle without filling (hollow).
+- [x] [EXERCISE 2 Shapes](Ejer2Figuras.java) Create a JAVA program that draws a right-angled triangle made of asterisks (*). The height must be requested from the user. Additionally, include code to draw the triangle without filling (hollow).
+- [x] [EXERCISE 3 Shapes](Ejer3Figuras.java) Create a JAVA program that draws an equilateral triangle made of asterisks (*). The height must be requested from the user. Additionally, include code to draw the triangle without filling (hollow).
 
 <kbd> [ ⬆️ GO UP](#ejercicios-de-tema-2) </kbd>
