@@ -2,12 +2,9 @@
 # EJERCICIOS - METODOS
 
 - [x] [EJERCICIO - MENU](Menu.java) ` 3 en 1 `
-
-- Implementa un método que a partir del lado, dibuje en cuadrado formado por asteriscos. Crea un método adicional para dibujar dicho cuadrado sin relleno.
-
-- Implementa un método que a partir de la altura, dibuje un triángulo rectángulo formado por asteriscos. Crea un método adicional para dibujar dicho triángulo sin relleno.
-
-- Crear un menú con 5 opciones, una por cada tipo de figura, y una opción para salir. Se deberá elegir una opción y realizar la acción correspondiente. El programa no terminará hasta que seleccionemos la opción SALIR del menú principal.
+<br>- Implementa un método que a partir del lado, dibuje en cuadrado formado por asteriscos. Crea un método adicional para dibujar dicho cuadrado sin relleno.
+<br>- Implementa un método que a partir de la altura, dibuje un triángulo rectángulo formado por asteriscos. Crea un método adicional para dibujar dicho triángulo sin relleno.
+<br>- Crear un menú con 5 opciones, una por cada tipo de figura, y una opción para salir. Se deberá elegir una opción y realizar la acción correspondiente. El programa no terminará hasta que seleccionemos la opción SALIR del menú principal.
 
 - [ ] [EJERCICIO - DIGITOS](Digitos.java) Crea un método que obtenga la cantidad de dígitos de un número N mayor que cero. Se debe pasar como parámetro el número N.
 - [ ] [EJERCICIO - POTENCIA](Potencia.java) Crea un método que obtenga el resultado de elevar un número a otro. Ambos números se deben pasar como parámetros. Los números deben ser positivos.
