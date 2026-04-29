@@ -1,4 +1,6 @@
-<kbd> [ 📂 MENU PRINCIPAL | MAIN MENU ](./Introduccion%20a%20Java/README.md) </kbd>
+[📂 MENU PRINCIPAL :es: ](./Introduccion%20a%20Java/README.md) | [📂 MAIN MENU :us: ](./Introduccion%20a%20Java/README_ENG.md) |
+-- | -- |
+</br>
 
 > [!NOTE]
 > MATERIALES DEL CURSO (Aula Directa S.L.)
