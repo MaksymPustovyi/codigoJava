@@ -3,17 +3,17 @@
 <hr>
 
 > [!NOTE]
-> EJERCICIOS DEL CURSO (Aula Directa S.L.)
-<br><br> Alumno - MAKSYM PUSTOVYI
+> EJERCICIOS DEL CURSO (Aula Directa S.L.) <img title="Powered by Java" align="right" height="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png">
+<br><br> Alumno - MAKSYM PUSTOVYI 
 <br> Nombre del curso - ANALISIS Y PROGRAMACION EN JAVA (140h.)
 <br> Codigo del curso - IFCD004PO
 
 > Expte. 98/2024/JP/0156 subvencionado por la JUNTA DE ANDALUCIA
 <br> (Cansejeria de empleo, empresa y comercio / consejeria empleo formac y trab autonomo)
 <br> con fecha de inicio el 8 de abril de 2026 y finalizacion el 13 de mayo de 2026
-
-<br><div align="right">
-
-<samp>*FDO. D.Pedro Guzmán Ruiz*</samp>
+<hr>
+<div align="right">
+ 
+*FDO. D.Pedro Guzmán Ruiz*
 
 </div>
