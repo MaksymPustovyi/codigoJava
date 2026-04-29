@@ -1,6 +1,6 @@
-<kbd> [ ◀️ MAIN MENU](../README.md) </kbd> <kbd> [ :gear: CHANGE LANGUAGE](./README.eng) </kbd>
+<kbd> [ 📂 MAIN MENU](../README.md) </kbd> <kbd> [ :gear: CHANGE LANGUAGE](./README.eng) </kbd>
 
-# EJERCICIOS - INICIACION
+# EJERCICIOS DE INICIACION
 
 - [x] [EJERCICIO 1 Inicio](Ejer1Iniciacion.java) Leer una cantidad ‘N’ y luego introducir ‘N’ números enteros. Se pide imprimir el mayor y el menor y las veces que aparece cada uno.
 - [x] [EJERCICIO 2 Inicio](Ejer2Iniciacion.java) Dado un número, determinar cuántos dígitos tiene. No se pueden utilizar ni variables ni funciones de tipo String. 
@@ -8,7 +8,7 @@
 <br>💡 He optimizado el programa: ahora admite números positivos y negativos, y muestra la suma total de forma textual y algebraica.
 - [x] [EJERCICIO 4 Inicio](Ejer4Iniciacion.java) Dada una secuencia de números enteros acabada en 0, obtener la suma de aquellos números tales que su número de cifras sea igual a la suma de las mismas. No se pueden utilizar Arrays.
 
-# EJERCICIOS - STRINGS
+# EJERCICIOS DE STRINGS
 
 - [x] [EJERCICIO 1 Strings](Ejer1Strings.java) Crea un programa que te pida una palabra y escriba las letras separadas por espacios.
 - [x] [EJERCICIO 2 Strings](Ejer2Strings.java) Crea un programa en JAVA que reciba 5 palabras y luego nos muestre la que tiene una longitud mayor.
@@ -17,10 +17,10 @@
 - [x] [EJERCICIO 4 Strings](Ejer4Strings.java) Crea un programa en JAVA que reciba una palabra por teclado e indique si es un palíndromo. Un palíndromo es una palabra que se lee igual de derecha a izquierda, que de izquierda a derecha. Ejemplo: RECONOCER
 <br>💡 He añadido trim() y toLowerCase() para normalizar la entrada, ignorando espacios laterales y la diferencia entre mayúsculas y minúsculas.
 
-# EJERCICIOS - FIGURAS
+# EJERCICIOS DE FIGURAS
 
 - [x] [EJERCICIO 1 Figuras](Ejer1Figuras.java) Crear un programa en JAVA que dibuje un rectángulo formado por asteriscos(*). Se deben pedir base y altura por teclado. Además, añade código adicional para que dibuje dicho rectángulo sin relleno
 - [x] [EJERCICIO 2 Figuras](Ejer2Figuras.java) Crea un programa en JAVA que dibuje un triángulo rectángulo formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho triángulo sin relleno
 - [x] [EJERCICIO 3 Figuras](Ejer3Figuras.java) Crea un programa en JAVA que dibuje un triángulo equilátero formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho rectángulo sin relleno
 
-<kbd> [ ⬆️ GO UP](#ejercicios---iniciacion) </kbd>
+<kbd> [ ⬆️ GO UP](#ejercicios-de-iniciacion) </kbd>
