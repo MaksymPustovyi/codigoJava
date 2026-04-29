@@ -28,4 +28,4 @@
 - [x] [EJERCICIO 2 Figuras](Ejer2Figuras.java) Crea un programa en JAVA que dibuje un triángulo rectángulo formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho triángulo sin relleno
 - [x] [EJERCICIO 3 Figuras](Ejer3Figuras.java) Crea un programa en JAVA que dibuje un triángulo equilátero formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho rectángulo sin relleno
 
-<kbd> [ ⬆️ GO UP](#ejercicios-de-tema-2) </kbd>
+<kbd> [ ⬆️ VOLVER AL INICIO](#ejercicios-de-tema-2) </kbd>
