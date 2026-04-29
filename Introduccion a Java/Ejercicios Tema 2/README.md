@@ -1,7 +1,7 @@
 ###### Ejercicios de Tema 2
 <div align="right">
 
-<kbd> [ 📂 MENU PRINCIPAL](../README.md) </kbd> <kbd> [ :gear: CHANGE LANGUAGE :us: ](./README.eng) </kbd>
+<kbd> [ 📂 MENU PRINCIPAL](../README.md) </kbd> <kbd> [ :gear: CHANGE LANGUAGE :us: ](./README_ENG.md) </kbd>
 
 </div>
 
