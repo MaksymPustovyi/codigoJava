@@ -1,5 +1,4 @@
-[◀️ MAIN MENU](../README.md) | :gear: [CHANGE LANGUAGE](./README.eng) |
--- | -- |
+<kbd> [ ◀️ MAIN MENU](../README.md) </kbd> <kbd> [ :gear: CHANGE LANGUAGE](./README.eng) </kbd>
 
 # EJERCICIOS - INICIACION
 
@@ -24,5 +23,4 @@
 - [x] [EJERCICIO 2 Figuras](Ejer2Figuras.java) Crea un programa en JAVA que dibuje un triángulo rectángulo formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho triángulo sin relleno
 - [x] [EJERCICIO 3 Figuras](Ejer3Figuras.java) Crea un programa en JAVA que dibuje un triángulo equilátero formado por asteriscos(*). Se debe pedir la altura del triángulo por teclado. Además, añade código adicional para que dibuje dicho rectángulo sin relleno
 
-[◀️ MAIN MENU](../README.md) |
--- |
+<kbd> [ ⬆️ GO UP](#ejercicios---iniciacion) </kbd>
