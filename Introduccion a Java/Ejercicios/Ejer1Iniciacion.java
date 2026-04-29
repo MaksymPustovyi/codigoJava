@@ -23,8 +23,8 @@ public class Ejer1Iniciacion {
         System.out.println("--------------------");
 
         // un bucle para leer y analizar la cantidad 'N' de numeros
-        while (contador < cantidadNumeros) {
-            System.out.print("Introduce un numero " + (contador + 1) + " de " + cantidadNumeros + ": ");
+        while (contador <= cantidadNumeros) {
+            System.out.print("Introduce un numero " + (contador) + " de " + cantidadNumeros + ": ");
             numActual = entrada.nextInt();
             System.out.println("--------------------");
 
