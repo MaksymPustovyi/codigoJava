@@ -28,4 +28,4 @@
 - [x] [EXERCISE 2 Shapes](Ejer2Figuras.java) Create a JAVA program that draws a right-angled triangle made of asterisks (*). The height must be requested from the user. Additionally, include code to draw the triangle without filling (hollow).
 - [x] [EXERCISE 3 Shapes](Ejer3Figuras.java) Create a JAVA program that draws an equilateral triangle made of asterisks (*). The height must be requested from the user. Additionally, include code to draw the triangle without filling (hollow).
 
-<kbd> [ ⬆️ GO UP](#ejercicios-de-tema-2) </kbd>
+<kbd> [ ⬆️ BACK TO TOP](#ejercicios-de-tema-2) </kbd>
