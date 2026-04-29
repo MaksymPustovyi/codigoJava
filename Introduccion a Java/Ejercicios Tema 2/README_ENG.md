@@ -1,4 +1,3 @@
-###### Topic 2 Exercises
 <div align="right">
 
 <kbd> [ 📂 MAIN MENU ](../README.md) </kbd> <kbd> [ :gear: CAMBIAR IDIOMA :spain: ](./README.eng) </kbd>
