@@ -1,5 +1,11 @@
+###### Ejercicios de Tema 3
+<div align="right">
 
-# EJERCICIOS - METODOS
+<kbd> [ 📂 MENU PRINCIPAL](../README.md) </kbd> <kbd> [ :gear: CHANGE LANGUAGE :us: ](./README_ENG.md) </kbd>
+
+</div>
+
+## EJERCICIOS - METODOS
 
 - [x] [EJERCICIO - MENU](Menu.java) ` 3 en 1 `
 <br>- Implementa un método que a partir del lado, dibuje en cuadrado formado por asteriscos. Crea un método adicional para dibujar dicho cuadrado sin relleno.
@@ -13,3 +19,5 @@
 - [ ] [EJERCICIO - CONVERSOS BINARIO](ConversosBinario.java) Crea un método que obtenga el número binario de un número N pasado como parámetro.
 - [ ] [EJERCICIO - ORDENAR ALFABETICAMENTE](OrdenarAlfabeticamente.java) Crea un método que compruebe si una palabra está ordenada alfabéticamente.
 - [ ] [EJERCICIO - SUMAR NUMEROS](SumarNumeros.java) Crea un método que obtenga la suma de los números naturales desde 1 hasta N. Se debe pasar como parámetro el número N, debe ser mayor que cero. Se debe imprimir toda la cadena por consola. Por ejemplo, para N=4 → ( 1+2+3+4 = 10).
+
+<kbd> [ ⬆️ VOLVER AL INICIO](#ejercicios-de-tema-3) </kbd>
