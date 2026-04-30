@@ -13,21 +13,24 @@ public class Potencia {
      */
     public static void main(String[] args) {
 
+        Scanner entrada = new Scanner(System.in);
         inicioDeLaPrograma();
 
         // Implementación de UX para guiar la entrada de datos
         System.out.print("Introduce el base: ");
-        int base = leerNumero();
+        int base = leerNumero(entrada, false); // Validación robusta de entrada para la base
 
         System.out.print("Introduce el exponente: ");
-        int exp = leerNumero();
+        int exp = leerNumero(entrada, true); // Validación específica para el exponente
 
         // Invocación del motor de cálculo recursivo
         BigInteger resultado = potencia(base, exp);
 
+        // Presentación de resultados con formato enriquecido
         mostrarResultados(resultado, base, exp);
 
         finDeLaPrograma();
+        entrada.close(); // Cierre del recurso Scanner al finalizar el proceso
     }
 
     /**
@@ -43,10 +46,11 @@ public class Potencia {
      */
     static BigInteger potencia(int base, int exp) {
         // Caso base: Cualquier número elevado a 0 es igual a 1.
-       if (exp == 0) return BigInteger.ONE;
+        if (exp == 0)
+            return BigInteger.ONE;
 
-       // Convertimos la base a BigInteger y multiplicamos recursivamente
-    return BigInteger.valueOf(base).multiply(potencia(base, exp - 1));
+        // Convertimos la base a BigInteger y multiplicamos recursivamente
+        return BigInteger.valueOf(base).multiply(potencia(base, exp - 1));
     }
 
     /**
@@ -54,36 +58,51 @@ public class Potencia {
      * Se mantiene el tipado double para la consistencia de los datos.
      */
     static void mostrarResultados(BigInteger resultado, int base, int exp) {
-        // BigInteger.toString() mostrará el número completo sin notación científica ni decimales
-        System.out.println("\nEl numero " + base + " elevado a " + exp + " es igual a " + resultado.toString() + " (tiene " + resultado.toString().length() + " cifra" + (resultado.toString().length()==1 ? ")" : "s)"));
+        // BigInteger.toString() mostrará el número completo sin notación científica ni
+        // decimales
+        System.out.println(
+                "\nEl numero " + base + " elevado a " + exp + " es igual a " + resultado.toString() + " (tiene "
+                        + resultado.toString().length() + " cifra" + (resultado.toString().length() == 1 ? ")" : "s)"));
     }
 
     /**
-     * Gestiona la entrada de datos desde el flujo estándar (System.in).
-     * Implementa un sistema de control de excepciones para garantizar 
-     * la robustez frente a entradas no numéricas.
+     * Gestiona la entrada de datos desde la consola con validación estricta.
+     * Implementa un bucle infinito hasta que el usuario proporcione un valor
+     * íntegro y lógico.
      * 
-     * @return numero Un entero validado por el sistema.
+     * @param entrada     El objeto Scanner para capturar la entrada del usuario.
+     * @param esExponente Booleano que activa la regla de negocio: el exponente no
+     *                    puede ser negativo.
+     * @return Un número entero validado y seguro para el flujo del programa.
      */
-    static int leerNumero() {
-        try (Scanner entrada = new Scanner(System.in)) {
-            int numero = 0; // Inicialización defensiva
-            boolean esValido = false;
+    static int leerNumero(Scanner entrada, boolean esExponente) {
+        int numero;
 
-            do {
-                try {
+        // Bucle de control hasta obtener una entrada válida
+        while (true) {
+            try {
+                // Verifica si la entrada actual es un número entero
+                if (entrada.hasNextInt()) {
                     numero = entrada.nextInt();
-                    esValido = true;
-                    // Si la lectura es exitosa, salimos del bucle
-                } catch (Exception e) {
-                    System.out.println("Error: Entrada no valida. Por favor, introduce un numero entero.");
-                    entrada.next(); // Limpiar el buffer para evitar un bucle infinito
-                }
-            } while (!esValido);
 
-            // Importante: El cierre del recurso Scanner debe manejarse con precaución
-            // si existen procesos de lectura posteriores en el hilo principal.
-            return numero;
+                    // Validación de regla de negocio para potencias
+                    if (esExponente && numero < 0) {
+                        System.out.println("Error: El exponente no puede ser negativo.");
+                        System.out.print("Introduce un exponente valido (>= 0): ");
+                        continue; // Reinicia el bucle para solicitar un nuevo dato
+                    }
+
+                    return numero; // Retorna el valor solo si cumple todas las validaciones
+                } else {
+                    // Gestión de errores para entradas no numéricas (letras, símbolos)
+                    System.out.println("Error: Entrada no valida.");
+                    entrada.next(); // Limpieza del buffer para evitar bucles infinitos
+                }
+            } catch (Exception e) {
+                // Captura de excepciones inesperadas durante la lectura
+                System.out.println("Error en la lectura.");
+                entrada.next(); // Asegura la limpieza del flujo de entrada
+            }
         }
     }
 
