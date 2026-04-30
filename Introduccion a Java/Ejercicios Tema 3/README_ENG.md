@@ -29,4 +29,4 @@
 
 - [ ] [EXERCISE - SUM NUMBERS](SumarNumeros.java) Create a method that calculates the sum of natural numbers from 1 to N. The number N must be passed as a parameter and must be greater than zero. The entire sequence must be printed to the console. For example, for N=4 → ( 1+2+3+4 = 10).
 
-<kbd> [ ⬆️ BACK TO TOP ](#ejercicios-de-tema-3) </kbd>
+<kbd> [ ⬆️ BACK TO TOP ](#topic-3-exercises) </kbd>
