@@ -17,7 +17,7 @@
 <br> :bulb: Refactor: profesionalización de comentarios Javadoc e implementación de try-catch para validación robusta de entradas.
 
 - [x] [EJERCICIO - POTENCIA](Potencia.java) Crea un método que obtenga el resultado de elevar un número a otro. Ambos números se deben pasar como parámetros. Los números deben ser positivos.
-<br> :bulb: Refactor: profesionalización de Javadoc e implementación de BigInteger con try-catch para cálculos robustos de potencias de gran magnitud.
+<br> :bulb: Refactor: optimización del cálculo de potencia con BigInteger para evitar desbordamientos y validación robusta de entradas mediante Guard Clauses.
 
 - [x] [EJERCICIO - INVERTIR](Invertir.java) Crea un método que dado un número positivo, lo imprima invertido por pantalla.
 <br> :bulb: Refactor: implementación de lógica de inversión de números mediante StringBuilder y validación robusta de entradas.
