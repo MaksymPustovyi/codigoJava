@@ -22,9 +22,11 @@
 - [x] [EXERCISE - REVERSE](Invertir.java) Create a method that takes a positive number and prints it reversed on the screen.
 <br> :bulb: Refactor: implement string-based number inversion logic with StringBuilder and robust input validation.
 
-- [ ] [EXERCISE - CHECK BINARY](ComprobarBinario.java) Create a method that checks if a number is binary. A binary number consists only of zeros and ones.
+- [x] [EXERCISE - CHECK BINARY](ComprobarBinario.java) Create a method that checks if a number is binary. A binary number consists only of zeros and ones.
+<br> :bulb: Refactor: evolved from static integer logic to a robust architectural solution featuring dynamic input, regex-based digit filtering, and string-based binary validation to prevent overflow.
 
-- [ ] [EXERCISE - BINARY CONVERTER](ConversosBinario.java) Create a method to obtain the binary representation of a number N passed as a parameter.
+- [x] [EXERCISE - BINARY CONVERTER](ConversosBinario.java) Create a method to obtain the binary representation of a number N passed as a parameter.
+<br> :bulb: Refactor: advanced binary converter using iterative StringBuilder logic to prevent integer overflow and robust input normalization for decimal-to-integer handling.
 
 - [ ] [EXERCISE - ALPHABETICAL ORDER](OrdenarAlfabeticamente.java) Create a method that checks if a word is sorted alphabetically.
 

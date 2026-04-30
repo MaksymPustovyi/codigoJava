@@ -22,8 +22,12 @@
 - [x] [EJERCICIO - INVERTIR](Invertir.java) Crea un método que dado un número positivo, lo imprima invertido por pantalla.
 <br> :bulb: Refactor: implementación de lógica de inversión de números mediante StringBuilder y validación robusta de entradas.
 
-- [ ] [EJERCICIO - COMPROBAR BINARIO](ComprobarBinario.java) Crea un método que compruebe si un número es binario. Un número binario está formado únicamente por ceros y unos.
-- [ ] [EJERCICIO - CONVERSOS BINARIO](ConversosBinario.java) Crea un método que obtenga el número binario de un número N pasado como parámetro.
+- [x] [EJERCICIO - COMPROBAR BINARIO](ComprobarBinario.java) Crea un método que compruebe si un número es binario. Un número binario está formado únicamente por ceros y unos.
+<br> :bulb: Refactor: evolución de una lógica estática con enteros a una solución arquitectónica robusta con entrada dinámica, filtrado de dígitos por Regex y validación binaria por cadenas para evitar desbordamientos.
+
+- [x] [EJERCICIO - CONVERSOS BINARIO](ConversosBinario.java) Crea un método que obtenga el número binario de un número N pasado como parámetro.
+<br> :bulb: Refactor: conversor binario avanzado mediante lógica iterativa con StringBuilder para evitar el desbordamiento de enteros y normalización robusta de entradas decimales.
+
 - [ ] [EJERCICIO - ORDENAR ALFABETICAMENTE](OrdenarAlfabeticamente.java) Crea un método que compruebe si una palabra está ordenada alfabéticamente.
 - [ ] [EJERCICIO - SUMAR NUMEROS](SumarNumeros.java) Crea un método que obtenga la suma de los números naturales desde 1 hasta N. Se debe pasar como parámetro el número N, debe ser mayor que cero. Se debe imprimir toda la cadena por consola. Por ejemplo, para N=4 → ( 1+2+3+4 = 10).
 
