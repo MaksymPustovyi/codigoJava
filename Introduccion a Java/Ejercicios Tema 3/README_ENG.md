@@ -8,9 +8,10 @@
 ## EXERCISES - METHODS
 
 - [x] [EXERCISE - MENU](Menu.java) ` 3 in 1 `
-<br>- Implement a method that draws a square of asterisks based on a given side length. Create an additional method to draw the square without filling (hollow).
-<br>- Implement a method that draws a right-angled triangle of asterisks based on a given height. Create an additional method to draw the triangle without filling (hollow).
-<br>- Create a menu with 5 options (one for each figure type) and an exit option. The program will execute the chosen action and will not terminate until the "EXIT" option is selected from the main menu.
+<br> - Implement a method that draws a square of asterisks based on a given side length. Create an additional method to draw the square without filling (hollow).
+<br> - Implement a method that draws a right-angled triangle of asterisks based on a given height. Create an additional method to draw the triangle without filling (hollow).
+<br> - Create a menu with 5 options (one for each figure type) and an exit option. The program will execute the chosen action and will not terminate until the "EXIT" option is selected from the main menu.
+<br> :bulb: Refactor: professionalize comments and implement try-catch for input validation
 - [x] [EXERCISE - DIGITS](Digitos.java) Create a method to obtain the number of digits of a number N greater than zero. The number N must be passed as a parameter.
 - [x] [EXERCISE - RISING](Potencia.java) Create a method to calculate the result of raising a number to a certain power. Both numbers must be passed as parameters and must be positive.
 - [ ] [EXERCISE - REVERSE](Invertir.java) Create a method that takes a positive number and prints it reversed on the screen.
