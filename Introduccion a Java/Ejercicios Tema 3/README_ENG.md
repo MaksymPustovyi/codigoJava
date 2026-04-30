@@ -19,7 +19,8 @@
 - [x] [EXERCISE - RISING](Potencia.java) Create a method to calculate the result of raising a number to a certain power. Both numbers must be passed as parameters and must be positive.
 <br> :bulb: Refactor: professionalize Javadoc and implement BigInteger with try-catch for robust high-magnitude power calculations.
 
-- [ ] [EXERCISE - REVERSE](Invertir.java) Create a method that takes a positive number and prints it reversed on the screen.
+- [x] [EXERCISE - REVERSE](Invertir.java) Create a method that takes a positive number and prints it reversed on the screen.
+<br> :bulb: Refactor: implement string-based number inversion logic with StringBuilder and robust input validation.
 
 - [ ] [EXERCISE - CHECK BINARY](ComprobarBinario.java) Create a method that checks if a number is binary. A binary number consists only of zeros and ones.
 
