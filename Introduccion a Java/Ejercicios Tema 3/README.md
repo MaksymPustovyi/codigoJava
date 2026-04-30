@@ -14,7 +14,7 @@
 <br> :bulb: Refactor: profesionalización de comentarios e implementación de validación de entradas
 
 - [x] [EJERCICIO - DIGITOS](Digitos.java) Crea un método que obtenga la cantidad de dígitos de un número N mayor que cero. Se debe pasar como parámetro el número N.
-<br> :bulb: Refactor: professionalize Javadoc comments and implement try-catch exception handling for robust input validation.
+<br> :bulb: Refactor: profesionalización de comentarios Javadoc e implementación de try-catch para validación robusta de entradas.
 
 - [x] [EJERCICIO - POTENCIA](Potencia.java) Crea un método que obtenga el resultado de elevar un número a otro. Ambos números se deben pasar como parámetros. Los números deben ser positivos.
 - [ ] [EJERCICIO - INVERTIR](Invertir.java) Crea un método que dado un número positivo, lo imprima invertido por pantalla.
