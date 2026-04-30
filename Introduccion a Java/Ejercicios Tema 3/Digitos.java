@@ -36,7 +36,7 @@ public class Digitos {
             esValido = true;
             // Si la lectura es exitosa, salimos del bucle
             } catch (Exception e) {
-                System.out.println("Error: Entrada no valida. Por favor, introduce un numero entero.");
+                System.out.println("[ERROR] Entrada no valida. Por favor, introduce un numero entero.");
                 entrada.next(); // Limpiar el buffer para evitar un bucle infinito
             }
         } while (!esValido);
@@ -67,7 +67,7 @@ public class Digitos {
      * Incluye lógica ternaria para la correcta concordancia gramatical (singular/plural).
      */
     static void mostrarResultados(int resultado, int numero) {
-        System.out.println("\nEl numero " + numero + " tiene " + resultado + " digito" + (resultado == 1 ? "" : "s"));
+        System.out.println("\n[RESULTADO] El numero " + numero + " tiene " + resultado + " digito" + (resultado == 1 ? "" : "s"));
     }
 
     /**

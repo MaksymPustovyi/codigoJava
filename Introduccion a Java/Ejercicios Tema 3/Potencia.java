@@ -61,7 +61,7 @@ public class Potencia {
         // BigInteger.toString() mostrará el número completo sin notación científica ni
         // decimales
         System.out.println(
-                "\nEl numero " + base + " elevado a " + exp + " es igual a " + resultado.toString() + " (tiene "
+                "\n[RESULTADO] El numero " + base + " elevado a " + exp + " es igual a " + resultado.toString() + " (tiene "
                         + resultado.toString().length() + " cifra" + (resultado.toString().length() == 1 ? ")" : "s)"));
     }
 
@@ -87,20 +87,20 @@ public class Potencia {
 
                     // Validación de regla de negocio para potencias
                     if (esExponente && numero < 0) {
-                        System.out.println("Error: El exponente no puede ser negativo.");
-                        System.out.print("Introduce un exponente valido (>= 0): ");
+                        System.out.println("[ERROR] El exponente no puede ser negativo.");
+                        System.out.print("[ERROR] Introduce un exponente valido (>= 0): ");
                         continue; // Reinicia el bucle para solicitar un nuevo dato
                     }
 
                     return numero; // Retorna el valor solo si cumple todas las validaciones
                 } else {
                     // Gestión de errores para entradas no numéricas (letras, símbolos)
-                    System.out.println("Error: Entrada no valida.");
+                    System.out.println("[ERROR] Entrada no valida.");
                     entrada.next(); // Limpieza del buffer para evitar bucles infinitos
                 }
             } catch (Exception e) {
                 // Captura de excepciones inesperadas durante la lectura
-                System.out.println("Error en la lectura.");
+                System.out.println("[ERROR] en la lectura.");
                 entrada.next(); // Asegura la limpieza del flujo de entrada
             }
         }

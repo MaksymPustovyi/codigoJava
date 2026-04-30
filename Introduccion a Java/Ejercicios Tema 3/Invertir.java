@@ -44,7 +44,7 @@ public class Invertir {
                 numero = entrada.nextLong();
                 esValido = true;
             } catch (Exception e) {
-                System.out.println("Error: Entrada no valida. Introduce un numero entero.");
+                System.out.println("[ERROR] Entrada no valida. Introduce un numero entero.");
                 entrada.next(); // Limpieza del buffer
             }
         } while (!esValido);
@@ -58,7 +58,7 @@ public class Invertir {
      * @param numeroInvertido
      */
     static void mostrarResultados(String numero, String numeroInvertido) {
-        System.out.println("\nEl numero " + numero + " invertido es " + numeroInvertido);
+        System.out.println("\n[RESULTADO] El numero " + numero + " invertido es " + numeroInvertido);
     }
 
     /**
