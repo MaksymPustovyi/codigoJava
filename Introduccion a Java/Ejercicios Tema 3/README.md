@@ -19,7 +19,9 @@
 - [x] [EJERCICIO - POTENCIA](Potencia.java) Crea un método que obtenga el resultado de elevar un número a otro. Ambos números se deben pasar como parámetros. Los números deben ser positivos.
 <br> :bulb: Refactor: profesionalización de Javadoc e implementación de BigInteger con try-catch para cálculos robustos de potencias de gran magnitud.
 
-- [ ] [EJERCICIO - INVERTIR](Invertir.java) Crea un método que dado un número positivo, lo imprima invertido por pantalla.
+- [x] [EJERCICIO - INVERTIR](Invertir.java) Crea un método que dado un número positivo, lo imprima invertido por pantalla.
+<br> :bulb: Refactor: implementación de lógica de inversión de números mediante StringBuilder y validación robusta de entradas.
+
 - [ ] [EJERCICIO - COMPROBAR BINARIO](ComprobarBinario.java) Crea un método que compruebe si un número es binario. Un número binario está formado únicamente por ceros y unos.
 - [ ] [EJERCICIO - CONVERSOS BINARIO](ConversosBinario.java) Crea un método que obtenga el número binario de un número N pasado como parámetro.
 - [ ] [EJERCICIO - ORDENAR ALFABETICAMENTE](OrdenarAlfabeticamente.java) Crea un método que compruebe si una palabra está ordenada alfabéticamente.
