@@ -17,6 +17,8 @@
 <br> :bulb: Refactor: profesionalización de comentarios Javadoc e implementación de try-catch para validación robusta de entradas.
 
 - [x] [EJERCICIO - POTENCIA](Potencia.java) Crea un método que obtenga el resultado de elevar un número a otro. Ambos números se deben pasar como parámetros. Los números deben ser positivos.
+<rb> :bulb: Refactor: profesionalización de Javadoc e implementación de BigInteger con try-catch para cálculos robustos de potencias de gran magnitud.
+
 - [ ] [EJERCICIO - INVERTIR](Invertir.java) Crea un método que dado un número positivo, lo imprima invertido por pantalla.
 - [ ] [EJERCICIO - COMPROBAR BINARIO](ComprobarBinario.java) Crea un método que compruebe si un número es binario. Un número binario está formado únicamente por ceros y unos.
 - [ ] [EJERCICIO - CONVERSOS BINARIO](ConversosBinario.java) Crea un método que obtenga el número binario de un número N pasado como parámetro.
