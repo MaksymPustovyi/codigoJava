@@ -66,24 +66,25 @@ public class Potencia {
      * @return numero Un entero validado por el sistema.
      */
     static int leerNumero() {
-        Scanner entrada = new Scanner(System.in);
-        int numero = 0; // Inicialización defensiva
-        boolean esValido = false;
+        try (Scanner entrada = new Scanner(System.in)) {
+            int numero = 0; // Inicialización defensiva
+            boolean esValido = false;
 
-        do {
-            try {
-                numero = entrada.nextInt();
-                esValido = true;
-                // Si la lectura es exitosa, salimos del bucle
-            } catch (Exception e) {
-                System.out.println("Error: Entrada no valida. Por favor, introduce un numero entero.");
-                entrada.next(); // Limpiar el buffer para evitar un bucle infinito
-            }
-        } while (!esValido);
+            do {
+                try {
+                    numero = entrada.nextInt();
+                    esValido = true;
+                    // Si la lectura es exitosa, salimos del bucle
+                } catch (Exception e) {
+                    System.out.println("Error: Entrada no valida. Por favor, introduce un numero entero.");
+                    entrada.next(); // Limpiar el buffer para evitar un bucle infinito
+                }
+            } while (!esValido);
 
-        // Importante: El cierre del recurso Scanner debe manejarse con precaución
-        // si existen procesos de lectura posteriores en el hilo principal.
-        return numero;
+            // Importante: El cierre del recurso Scanner debe manejarse con precaución
+            // si existen procesos de lectura posteriores en el hilo principal.
+            return numero;
+        }
     }
 
     /**
