@@ -17,7 +17,7 @@
 <br> :bulb: Refactor: professionalize Javadoc comments and implement try-catch exception handling for robust input validation.
 
 - [x] [EXERCISE - RISING](Potencia.java) Create a method to calculate the result of raising a number to a certain power. Both numbers must be passed as parameters and must be positive.
-<br> :bulb: Refactor: professionalize Javadoc and implement BigInteger with try-catch for robust high-magnitude power calculations.
+<br> :bulb: Refactor: optimize power calculation with BigInteger to prevent overflow and implement robust input validation with Guard Clauses.
 
 - [x] [EXERCISE - REVERSE](Invertir.java) Create a method that takes a positive number and prints it reversed on the screen.
 <br> :bulb: Refactor: implement string-based number inversion logic with StringBuilder and robust input validation.
