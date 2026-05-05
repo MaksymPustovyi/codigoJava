@@ -7,8 +7,7 @@
 
 ## EJERCICIOS - ARRAY
 
-- [x] [EJERCICIO - ARRAY BUSCADOR](EjercicioArray1.java) Crea un método que dado un Array de enteros y un valor entero, muestre la
-cantidad de veces que aparece el entero en el Array.
+- [x] [EJERCICIO - ARRAY BUSCADOR](EjercicioArray1.java) Crea un método que dado un Array de enteros y un valor entero, muestre la cantidad de veces que aparece el entero en el Array.
 <br> :bulb: Refactor: adjusted program flow to display the generated array before requesting user input for improved UX.
 
 
