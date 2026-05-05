@@ -31,6 +31,7 @@
 - [x] [EXERCISE - ALPHABETICAL ORDER](OrdenarAlfabeticamente.java) Create a method that checks if a word is sorted alphabetically.
 <br> :bulb: Refactor: strict Regex validation, iterative optimization to avoid stack overhead, and automated UTF-8 console configuration with Collator for full RAE compliance.
 
-- [ ] [EXERCISE - SUM NUMBERS](SumarNumeros.java) Create a method that calculates the sum of natural numbers from 1 to N. The number N must be passed as a parameter and must be greater than zero. The entire sequence must be printed to the console. For example, for N=4 → ( 1+2+3+4 = 10).
+- [x] [EXERCISE - SUM NUMBERS](SumarNumeros.java) Create a method that calculates the sum of natural numbers from 1 to N. The number N must be passed as a parameter and must be greater than zero. The entire sequence must be printed to the console. For example, for N=4 → ( 1+2+3+4 = 10).
+<br> :bulb: Refactor: implemented recursive methods for summation and string formatting, integrating a persistent validation loop.
 
 <kbd> [ ⬆️ BACK TO TOP ](#topic-3-exercises) </kbd>
