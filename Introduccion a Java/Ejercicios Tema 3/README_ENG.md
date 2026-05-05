@@ -29,7 +29,7 @@
 <br> :bulb: Refactor: advanced binary converter using iterative StringBuilder logic to prevent integer overflow and robust input normalization for decimal-to-integer handling.
 
 - [x] [EXERCISE - ALPHABETICAL ORDER](OrdenarAlfabeticamente.java) Create a method that checks if a word is sorted alphabetically.
-<br> :bulb: Refactor: strict Regex validation, iterative optimization, and native RAE support via Collator to ensure linguistic and visual integrity.
+<br> :bulb: Refactor: strict Regex validation, iterative optimization to avoid stack overhead, and automated UTF-8 console configuration with Collator for full RAE compliance.
 
 - [ ] [EXERCISE - SUM NUMBERS](SumarNumeros.java) Create a method that calculates the sum of natural numbers from 1 to N. The number N must be passed as a parameter and must be greater than zero. The entire sequence must be printed to the console. For example, for N=4 → ( 1+2+3+4 = 10).
 
