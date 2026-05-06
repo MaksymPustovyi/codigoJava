@@ -23,7 +23,7 @@ public class EjercicioArray2 {
         // Obtención de datos
         String[][] palabras = GeneradorEstructuras.generarMatrizAleatoria(3, 5);
 
-        System.out.println("\nVisualizando matriz:");
+        System.out.println("\n👁️  Visualizando matriz:");
         imprimirMatrizVisual(palabras);
 
         // Análisis dentro del mismo clase

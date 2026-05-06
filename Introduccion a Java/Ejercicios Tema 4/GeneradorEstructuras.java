@@ -12,14 +12,17 @@ public class GeneradorEstructuras {
     public static String[][] generarMatrizAleatoria(int minDim, int maxDim) {
         int filas = RANDOM.nextInt((maxDim - minDim) + 1) + minDim;
         int columnas = RANDOM.nextInt((maxDim - minDim) + 1) + minDim;
+        int palabraLongitudMin = 3;
+        int palabraLongitudMax = 8;
 
-        System.out.println("⚙️  [SISTEMA]: Creando matriz 🎲  de " + filas + "x" + columnas);
+        System.out.println("⚙️  [SISTEMA]: Creando matriz de 🎲  tamaño (" + filas + "x" + columnas + ")");
+        System.out.println("⚙️  [SISTEMA]: Creando palabras de 🎲  longitud (" + palabraLongitudMin + " a " + palabraLongitudMax + " caracteres)");
 
         String[][] matriz = new String[filas][columnas];
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 // Delegamos la creación de la palabra al GeneradorLexico
-                matriz[i][j] = GeneradorLexico.generarPalabraAleatoria(3, 8);
+                matriz[i][j] = GeneradorLexico.generarPalabraAleatoria(palabraLongitudMin, palabraLongitudMax);
             }
         }
         return matriz;

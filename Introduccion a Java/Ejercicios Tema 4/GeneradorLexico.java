@@ -17,9 +17,6 @@ public class GeneradorLexico {
      */
     public static String generarPalabraAleatoria(int min, int max) {
         int longitud = RANDOM.nextInt((max - min) + 1) + min;
-        
-        // Mensaje de sistema con estilo dinámico
-        System.out.println("⚙️  [SISTEMA]: Generando palabra de " + longitud + " caracteres...");
 
         StringBuilder sb = new StringBuilder(longitud);
         for (int i = 0; i < longitud; i++) {
