@@ -9,4 +9,4 @@
 
 ## [TOPIC 3 EXERCISES - Methods](./Ejercicios%20Tema%203/README_ENG.md)
 
-## [TOPIC 4 EXERCISES - Array](./Ejercicios%20Tema%204/README_ENG.md)
+## [TOPIC 4 EXERCISES - Arrays](./Ejercicios%20Tema%204/README_ENG.md)
