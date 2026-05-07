@@ -1,3 +1,4 @@
+package EjercicioArray3;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 

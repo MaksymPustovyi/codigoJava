@@ -1,3 +1,4 @@
+package EjercicioArray3;
 import java.util.Random;
 
 /**

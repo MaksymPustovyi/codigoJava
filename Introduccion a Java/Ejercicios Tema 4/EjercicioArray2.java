@@ -2,6 +2,8 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+import EjercicioArray3.GeneradorEstructuras;
+
 /**
  * Clase principal que coordina el flujo y realiza el análisis de datos.
  */
