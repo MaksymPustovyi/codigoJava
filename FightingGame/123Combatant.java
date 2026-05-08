@@ -1,10 +1,5 @@
 import java.util.*;
 
-/**
- * ES: Modelo del combatiente con lógica de estadísticas dinámicas.
- * EN: Combatant model with dynamic statistics logic.
- * UA: Модель бійця з логікою динамічних характеристик.
- */
 class Combatant {
     public String name;
     public float globalHp = GameSettings.BASE_GLOBAL_HP;
@@ -26,25 +21,16 @@ class Combatant {
         parts.put(BodyPartType.R_LEG,   new BodyPart(BodyPartType.R_LEG,   startX + 85, yOff + 290, 45, 170));
     }
 
-    // ES: La salud de los brazos afecta la precisión.
-    // EN: Arm health affects accuracy.
-    // UA: Здоров'я рук впливає на точність.
     public float getAccuracy() {
-        float armEff = (parts.get(BodyPartType.L_ARM).hp + parts.get(BodyPartType.R_ARM).hp) / 200f;
-        return GameSettings.BASE_ACCURACY * (0.5f + 0.5f * armEff);
+        float arms = (parts.get(BodyPartType.L_ARM).hp + parts.get(BodyPartType.R_ARM).hp) / 200f;
+        return GameSettings.BASE_ACCURACY * (0.5f + 0.5f * arms);
     }
 
-    // ES: La salud de las piernas afecta la evasión.
-    // EN: Leg health affects evasion.
-    // UA: Здоров'я ніг впливає на ухилення.
     public float getEvasionChance() {
-        float legEff = (parts.get(BodyPartType.L_LEG).hp + parts.get(BodyPartType.R_LEG).hp) / 200f;
-        return GameSettings.BASE_EVASION * (0.4f + 0.6f * legEff);
+        float legs = (parts.get(BodyPartType.L_LEG).hp + parts.get(BodyPartType.R_LEG).hp) / 200f;
+        return GameSettings.BASE_EVASION * (0.4f + 0.6f * legs);
     }
 
-    // ES: La salud general afecta la fuerza de ataque.
-    // EN: Overall health affects attack power.
-    // UA: Загальне здоров'я впливає на силу атаки.
     public float getPower() {
         return 0.5f + 0.5f * (globalHp / GameSettings.BASE_GLOBAL_HP);
     }

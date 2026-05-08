@@ -221,7 +221,7 @@ public class TacticalArena extends JFrame {
         double hbY = headY - (220 * GameSettings.scaleY);
 
         // Розрахунок HP з урахуванням майбутньої шкоди від кровотечі
-        float bleed = c.getBleedSum();
+        float bleed = c.getBleedTotal();
         float healthAfterBleed = Math.max(0, c.globalHp - bleed);
 
         // Малюємо фон ХП-бару
