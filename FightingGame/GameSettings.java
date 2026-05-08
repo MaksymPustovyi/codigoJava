@@ -12,6 +12,8 @@ class GameSettings {
     public static final double REF_WIDTH = 1920.0;
     public static final double REF_HEIGHT = 1080.0;
     public static double scaleX, scaleY, scale;
+    public static float aiHpModifier = 1.0f; // Змінюється меню
+    public static String playerName = "Jugador";
 
     public static void initScaling(Component c) {
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
