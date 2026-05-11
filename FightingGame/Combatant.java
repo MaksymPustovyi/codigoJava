@@ -1,10 +1,9 @@
 import java.util.*;
 
-class Combatant {
+public class Combatant {
     public String name;
     public float globalHp = GameSettings.BASE_GLOBAL_HP;
     public Map<BodyPartType, BodyPart> parts = new LinkedHashMap<>();
-
     public BodyPartType attackTarget, evasionPoint, lastAtk, lastEva, lastReceivedHit;
     public Set<BodyPartType> defensePoints = new HashSet<>(), lastDef = new HashSet<>();
     public boolean lastHitWasGuarded, lastHitWasEvaded;
@@ -33,21 +32,19 @@ class Combatant {
         return parts.get(BodyPartType.HEAD).hp / 100f;
     }
 
-    public float getAccuracy() {
-        float armLoss = 1.0f - getArmEff();
-        float headLoss = 1.0f - getHeadEff();
-        return GameSettings.BASE_ACCURACY - (armLoss * 0.5f) - headLoss;
-    }
-
-    public float getEvasionChance() {
-        return GameSettings.BASE_EVASION * getLegEff();
+    public float getBleedSum() {
+        return (float) parts.values().stream().mapToDouble(p -> p.bleeding).sum();
     }
 
     public float getPower() {
         return getArmEff() * 100f;
     }
 
-    public float getBleedSum() {
-        return (float) parts.values().stream().mapToDouble(p -> p.bleeding).sum();
+    public float getEvasionChance() {
+        return GameSettings.BASE_EVASION * getLegEff();
+    }
+
+    public float getAccuracy() {
+        return GameSettings.BASE_ACCURACY - (1.0f - getArmEff()) * 0.5f - (1.0f - getHeadEff());
     }
 }

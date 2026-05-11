@@ -7,8 +7,7 @@ class GameSettings {
     public static final double REF_HEIGHT = 1080.0;
     public static double scaleX, scaleY, scale;
     
-    public static String playerName = "Jugador";
-    public static float aiHpModifier = 1.0f;
+    public static String playerName = "Player";
 
     public static void initScaling() {
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
