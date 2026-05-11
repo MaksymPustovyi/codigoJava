@@ -17,16 +17,25 @@ public class StartMenu extends JDialog {
     private final Color COLOR_TEXT_DIM = new Color(160, 165, 175);
 
     public StartMenu() {
-        setTitle("Setup");
+        setUndecorated(true); // Прибираємо системну рамку для сучасного вигляду
         setModal(true);
         setSize(400, 520);
         setLocationRelativeTo(null);
-        setResizable(false);
         
         JPanel root = new JPanel();
         root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
         root.setBackground(COLOR_BG);
-        root.setBorder(new EmptyBorder(40, 40, 40, 40));
+        root.setBorder(new EmptyBorder(10, 30, 40, 30));
+
+        // --- ВЕРХНЯ ПАНЕЛЬ З КНОПКОЮ ВИХОДУ ---
+        JPanel topBar = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+        topBar.setOpaque(false);
+        topBar.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        
+        JButton exitBtn = new JButton("✕");
+        styleCloseButton(exitBtn);
+        exitBtn.addActionListener(e -> System.exit(0));
+        topBar.add(exitBtn);
 
         // Ініціалізація компонентів
         title = new JLabel(L10n.GAME_TITLE);
@@ -47,7 +56,6 @@ public class StartMenu extends JDialog {
         langBox = new JComboBox<>(new String[]{"Українська", "English", "Español"});
         styleComboBox(langBox);
         
-        // --- МИТТЄВА ЗМІНА МОВИ ---
         langBox.addActionListener(e -> {
             L10n.setLocale(langBox.getSelectedIndex());
             refreshTexts();
@@ -63,10 +71,12 @@ public class StartMenu extends JDialog {
         });
 
         // Комнування
+        root.add(topBar);
+        root.add(Box.createRigidArea(new Dimension(0, 10)));
         root.add(title);
         root.add(Box.createRigidArea(new Dimension(0, 5)));
         root.add(subtitle);
-        root.add(Box.createRigidArea(new Dimension(0, 50)));
+        root.add(Box.createRigidArea(new Dimension(0, 40)));
         root.add(labelName);
         root.add(Box.createRigidArea(new Dimension(0, 8)));
         root.add(nameField);
@@ -78,24 +88,25 @@ public class StartMenu extends JDialog {
         root.add(startBtn);
 
         add(root);
-
-        // Початкове встановлення текстів
-        L10n.setLocale(0);
+        langBox.setSelectedIndex(1);
+        L10n.setLocale(1);
         refreshTexts();
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                if (!started) System.exit(0);
-            }
-        });
-
         setVisible(true);
     }
 
-    /**
-     * Оновлює всі текстові компоненти меню згідно з поточною локаллю
-     */
+    private void styleCloseButton(JButton btn) {
+        btn.setFont(new Font("Dialog", Font.BOLD, 18));
+        btn.setForeground(COLOR_TEXT_DIM);
+        btn.setContentAreaFilled(false);
+        btn.setBorderPainted(false);
+        btn.setFocusPainted(false);
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btn.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) { btn.setForeground(Color.RED); }
+            public void mouseExited(MouseEvent e) { btn.setForeground(COLOR_TEXT_DIM); }
+        });
+    }
+
     private void refreshTexts() {
         title.setText(L10n.GAME_TITLE);
         subtitle.setText(L10n.L_SUBTITLE);

@@ -10,29 +10,38 @@ public class TacticalArena extends JFrame {
     private ArenaUI ui;
 
     public TacticalArena() {
+        setUndecorated(true);
         GameSettings.initScaling();
+
+         // 1. Головне меню
         StartMenu menu = new StartMenu();
         if (!menu.isStarted()) System.exit(0);
 
-        // 1. Створюємо UI (Header, Side Log)
+        // 2. Правила бою
+        RulesScreen rules = new RulesScreen(this);
+        if (!rules.isReadyToFight()) {
+            // Якщо гравець закрив правила, ми "знищуємо" це вікно гри.
+            // Завдяки windowClosed слухачу в startAppCycle(), меню відкриється знову.
+            this.dispose(); 
+            return; // ПЕРЕРИВАЄМО конструктор, гра не почнеться
+        }
+
+        // 3. Якщо ми тут — гравець натиснув "Готовий", ініціалізуємо UI та бій
         ui = new ArenaUI(this);
 
-        // 2. Розрахунок симетричних позицій
+        // 4. Позиції бійців (симетрія)
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        double battlefieldWidth = screen.getWidth() - (480 * GameSettings.scaleX);
+        double logWidth = 450 * GameSettings.scaleX;
+        double battlefieldWidth = screen.getWidth() - logWidth;
         double centerX = battlefieldWidth / 2.0;
         double gap = 350 * GameSettings.scale;
 
         player = new Combatant(GameSettings.playerName, centerX - gap - (75 * GameSettings.scale));
         ai = new Combatant(L10n.AI_NAME, centerX + gap - (75 * GameSettings.scale));
 
-        // 3. Створюємо Графічну панель
+        // 5. Панель та менеджер
         battlefield = new BattlefieldPanel(player, ai, new EmojiRenderer(GameSettings.scale));
-        
-        // 4. Створюємо Менеджер Логіки
         manager = new BattleManager(player, ai, engine, ui, battlefield);
-
-        // 5. Підключаємо керування
         battlefield.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -41,18 +50,36 @@ public class TacticalArena extends JFrame {
             }
         });
 
-        // Додаємо панель у фрейм
         getContentPane().add(battlefield, BorderLayout.CENTER);
         ui.gameSurface = battlefield;
 
-        setTitle(L10n.GAME_TITLE);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        // ВИПРАВЛЕНО: Тепер при натисканні на хрестик Windows (якщо він буде)
+        // або викликані dispose(), вікно просто знищується, а не вимикає програму
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
+        toFront();
+        requestFocus();
+    }
+
+    // НОВЕ: Метод, який запускає гру і чекає на її закриття для перезапуску
+    public static void startAppCycle() {
+        TacticalArena game = new TacticalArena();
+
+        // Додаємо слухача: коли вікно закривається (dispose), запускаємо метод знову
+        game.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                // Викликаємо самі себе, щоб почати з StartMenu
+                SwingUtilities.invokeLater(TacticalArena::startAppCycle);
+            }
+        });
     }
 
     public static void main(String[] args) {
-        L10n.setLocale(0);
-        SwingUtilities.invokeLater(TacticalArena::new);
+        L10n.setLocale(1);
+        // Запускаємо через наш новий метод циклу
+        SwingUtilities.invokeLater(TacticalArena::startAppCycle);
     }
 }
