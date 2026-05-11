@@ -7,24 +7,31 @@ class BattleEngine {
         String actionBase = String.format(L10n.LOG_ACTION, atk.name, atk.attackTarget.getName());
         float accB = def.getAccuracy(), evaB = def.getEvasionChance(), pwrB = def.getPower();
 
-        // 1. Гілка УХИЛЕННЯ
+        // --- ОНОВЛЕНА ГІЛКА УХИЛЕННЯ ---
         if (def.evasionPoint == atk.attackTarget) {
-            if (isPlayerAtk) def.lastHitWasEvaded = true;
-            log.append(actionBase + L10n.LOG_EVADE);
-            ensureNewLine(log, L10n.LOG_EVADE); // Гарантуємо, що рядок завершено
-            log.append("\n"); // Пуста лінія-розділювач для наступного бійця
-            return String.format(L10n.SHORT_EVADE, atk.name);
+            // Перевіряємо математичний шанс (стан ніг)
+            if (Math.random() < def.getEvasionChance()) {
+                if (isPlayerAtk) def.lastHitWasEvaded = true;
+                log.append(actionBase + L10n.LOG_EVADE);
+                ensureNewLine(log, L10n.LOG_EVADE);
+                log.append("\n"); 
+                return String.format(L10n.SHORT_EVADE, atk.name);
+            } else {
+                // Якщо вгадав точку, але шанс не спрацював (ноги пошкоджені)
+                log.append(" > " + def.name + " вгадав напрямок, але не встиг ухилитися!\n");
+            }
         }
+        // --------------------------------
 
-        // 2. Гілка ПРОМАХУ
+        // 2. Точність (промах)
         if (Math.random() > atk.getAccuracy()) {
             log.append(actionBase + L10n.LOG_MISS);
-            ensureNewLine(log, L10n.LOG_MISS); // Гарантуємо, що рядок завершено
-            log.append("\n"); // Пуста лінія-розділювач для наступного бійця
+            ensureNewLine(log, L10n.LOG_MISS);
+            log.append("\n");
             return String.format(L10n.SHORT_MISS, atk.name);
         }
 
-        // 3. Гілка ВЛУЧАННЯ
+        // 3. Розрахунок урону (якщо не ухилився і не промахнувся)
         float baseDmg = 30f * (atk.getPower() / 100f);
         boolean guarded = def.defensePoints.contains(atk.attackTarget);
         if (guarded && isPlayerAtk) def.lastHitWasGuarded = true;
@@ -41,20 +48,18 @@ class BattleEngine {
             target.bleeding += bleedAdded;
         }
 
-        // Лог основного влучання
         String hitLine = actionBase + (guarded ? L10n.LOG_GUARD : "") + String.format(L10n.LOG_HIT, "", (int) fDmg);
         log.append(hitLine);
         ensureNewLine(log, hitLine);
 
-        // Наслідки (якщо є) пишуться без пустих ліній між собою
         if (bleedAdded > 0 && L10n.CONS_BLEED != null) {
             log.append(String.format(L10n.CONS_BLEED, def.name, bleedAdded));
         }
+        
         logConsequence(log, def.name, L10n.CONS_ACCURACY, accB, def.getAccuracy(), 100);
         logConsequence(log, def.name, L10n.CONS_EVASION, evaB, def.getEvasionChance(), 100);
         logConsequence(log, def.name, L10n.CONS_POWER, pwrB, def.getPower(), 1);
 
-        // Фінальна пуста лінія-розділювач для відокремлення ходів
         log.append("\n");
 
         return guarded ? String.format(L10n.SHORT_GUARD, atk.name, atk.attackTarget.getName(), (int) fDmg)
