@@ -1,71 +1,138 @@
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.geom.*;
 
 public class TacticalArena extends JFrame {
     private Combatant player, ai;
     private BattleEngine engine = new BattleEngine();
     private EmojiRenderer emojiRenderer;
-    private JTextArea detailedLog = new JTextArea();
-    private JLabel shortLog = new JLabel(L10n.STEP_1_ATK, SwingConstants.CENTER);
+    private ArenaUI ui;
     private int step = 0;
 
     public TacticalArena() {
+        // 1. Ініціалізація налаштувань
         GameSettings.initScaling();
+
+        // 2. Виклик меню (блокує виконання до закриття)
         StartMenu menu = new StartMenu();
-        if (!menu.isStarted()) System.exit(0);
+        if (!menu.isStarted())
+            System.exit(0);
 
-        this.emojiRenderer = new EmojiRenderer(GameSettings.scale);
-        player = new Combatant(GameSettings.playerName, 300);
-        ai = new Combatant(L10n.AI_NAME, 1200);
-
+        // 3. Налаштування базових параметрів вікна
         setTitle(L10n.GAME_TITLE);
-        setExtendedState(MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setBackground(new Color(25, 27, 33));
         setLayout(new BorderLayout());
 
-        setupUI();
+        // 4. Створення інтерфейсу
+        ui = new ArenaUI(this);
+        this.emojiRenderer = new EmojiRenderer(GameSettings.scale);
+
+        // 5. Створення персонажів
+        player = new Combatant(GameSettings.playerName, 400);
+        ai = new Combatant(L10n.AI_NAME, 1150);
+
+        // 6. Налаштування поля бою
+        setupBattlefield();
+
+        // --- ФІКС: ПРАВИЛЬНИЙ ЗАПУСК ВІКНА ---
+        // Спочатку встановлюємо стан максимізації
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        // Робимо вікно видимим
         setVisible(true);
+        
+        // Примусово виводимо на передній план та надаємо фокус
+        toFront();
+        requestFocus();
+    }
+
+    private void setupBattlefield() {
+        JPanel surface = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+                g2.setColor(new Color(25, 27, 33));
+                g2.fillRect(0, 0, getWidth(), getHeight());
+
+                drawCombatant(g2, player, true);
+                drawCombatant(g2, ai, false);
+            }
+        };
+
+        surface.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                handleMouse(e.getPoint());
+                repaint();
+            }
+        });
+
+        getContentPane().add(surface, BorderLayout.CENTER);
+        ui.gameSurface = surface;
+    }
+
+    private void handleMouse(Point p) {
+        if (step == 0) {
+            for (BodyPart bp : ai.parts.values())
+                if (bp.bounds.contains(p)) {
+                    resetVisuals();
+                    player.attackTarget = bp.type;
+                    step = 1;
+                    ui.shortLog.setText("<html><center>" + L10n.STEP_2_EVA + "</center></html>");
+                    return;
+                }
+        } else {
+            for (BodyPart bp : player.parts.values())
+                if (bp.bounds.contains(p)) {
+                    if (step == 1) {
+                        player.evasionPoint = bp.type;
+                        step = 2;
+                        ui.shortLog.setText("<html><center>" + L10n.STEP_3_DEF + "</center></html>");
+                    } else if (step == 2) {
+                        player.defensePoints.add(bp.type);
+                        step = 3;
+                        ui.shortLog.setText("<html><center>" + L10n.STEP_4_DEF + "</center></html>");
+                    } else if (step == 3 && !player.defensePoints.contains(bp.type)) {
+                        player.defensePoints.add(bp.type);
+                        repaint();
+                        SwingUtilities.invokeLater(() -> {
+                            runTurn();
+                            repaint();
+                        });
+                    }
+                    return;
+                }
+        }
     }
 
     private void runTurn() {
-        // 1. ПЕРШИМ ДІЛОМ: Комп'ютер обирає свої точки
         ai.attackTarget = BodyPartType.values()[(int) (Math.random() * 7)];
         ai.evasionPoint = BodyPartType.values()[(int) (Math.random() * 7)];
         ai.defensePoints.clear();
         while (ai.defensePoints.size() < 2)
             ai.defensePoints.add(BodyPartType.values()[(int) (Math.random() * 7)]);
 
-        // 2. ДРУГИМ ДІЛОМ: Записуємо номер раунду в лог
-        detailedLog.append(String.format(L10n.LOG_ROUND, engine.getRound()));
+        ui.detailedLog.append(String.format(L10n.LOG_ROUND, engine.getRound()));
+        engine.applyBleeding(player, ui.detailedLog);
+        engine.applyBleeding(ai, ui.detailedLog);
 
-        // 3. ТРЕТІМ ДІЛОМ: Кровотеча (перед ударами)
-        engine.applyBleeding(player, detailedLog);
-        engine.applyBleeding(ai, detailedLog);
-
-        // 4. ЧЕТВЕРТИМ ДІЛОМ: Тільки тепер проводимо атаки
-        String pRes = engine.processAttack(player, ai, true, detailedLog);
-        String aRes = engine.processAttack(ai, player, false, detailedLog);
+        String pRes = engine.processAttack(player, ai, true, ui.detailedLog);
+        String aRes = engine.processAttack(ai, player, false, ui.detailedLog);
 
         player.lastReceivedHit = ai.attackTarget;
+        ui.updateStatus(pRes, aRes);
 
-        // Оновлення верхнього лога (HTML з фіксованою структурою)
-        shortLog.setText("<html><body style='text-align: center;'>" +
-                "<div style='white-space: nowrap;'>" + pRes + "</div>" +
-                "<div style='white-space: nowrap;'>" + aRes + "</div>" +
-                "</body></html>");
-
-        // Налаштування JTextArea для коректного відображення
-        detailedLog.setLineWrap(true);
-        detailedLog.setWrapStyleWord(true);
-        detailedLog.setCaretPosition(detailedLog.getDocument().getLength());
-
-        // 5. Збереження виборів для малювання емодзі та перехід до наступного раунду
         saveChoices();
         engine.incrementRound();
         step = 0;
+
+        ui.detailedLog.setCaretPosition(ui.detailedLog.getDocument().getLength());
 
         if (player.globalHp <= 0 || ai.globalHp <= 0) {
             JOptionPane.showMessageDialog(this, player.globalHp > 0 ? L10n.WIN : L10n.LOSS);
@@ -78,13 +145,10 @@ public class TacticalArena extends JFrame {
         player.lastEva = player.evasionPoint;
         player.lastDef.clear();
         player.lastDef.addAll(player.defensePoints);
-
         ai.lastAtk = ai.attackTarget;
         ai.lastEva = ai.evasionPoint;
         ai.lastDef.clear();
         ai.lastDef.addAll(ai.defensePoints);
-
-        // Очищення для нового вибору
         player.attackTarget = null;
         player.evasionPoint = null;
         player.defensePoints.clear();
@@ -92,82 +156,15 @@ public class TacticalArena extends JFrame {
     }
 
     private void resetVisuals() {
-        player.lastAtk = null; player.lastEva = null; player.lastDef.clear(); player.lastReceivedHit = null;
-        ai.lastHitWasGuarded = false; ai.lastHitWasEvaded = false;
-        ai.lastAtk = null; ai.lastEva = null; ai.lastDef.clear();
-    }
-
-    private void setupUI() {
-        shortLog.setFont(new Font("Segoe UI Semibold", Font.PLAIN, (int) (24 * GameSettings.scale)));
-        shortLog.setForeground(new Color(130, 190, 255));
-        shortLog.setPreferredSize(new Dimension(0, (int) (120 * GameSettings.scaleY)));
-        add(shortLog, BorderLayout.NORTH);
-
-        JPanel gamePanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2 = (Graphics2D) g;
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(new Color(25, 27, 33));
-                g2.fillRect(0, 0, getWidth(), getHeight());
-                drawCombatant(g2, player, true);
-                drawCombatant(g2, ai, false);
-            }
-        };
-        gamePanel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                handleMouse(e.getPoint());
-                repaint();
-            }
-        });
-        add(gamePanel, BorderLayout.CENTER);
-
-        detailedLog.setEditable(false);
-        detailedLog.setBackground(new Color(15, 15, 20));
-        detailedLog.setForeground(new Color(180, 190, 210));
-        detailedLog.setFont(new Font("Dialog", Font.PLAIN, (int) (16 * GameSettings.scale)));
-
-        JScrollPane scroll = new JScrollPane(detailedLog);
-        scroll.setPreferredSize(new Dimension((int) (480 * GameSettings.scaleX), 0));
-        scroll.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.DARK_GRAY));
-        add(scroll, BorderLayout.EAST);
-    }
-
-    private void handleMouse(Point p) {
-        if (step == 0) {
-            for (BodyPart bp : ai.parts.values())
-                if (bp.bounds.contains(p)) {
-                    resetVisuals();
-                    player.attackTarget = bp.type;
-                    step = 1;
-                    shortLog.setText(L10n.STEP_2_EVA);
-                    return;
-                }
-        } else {
-            for (BodyPart bp : player.parts.values())
-                if (bp.bounds.contains(p)) {
-                    if (step == 1) {
-                        player.evasionPoint = bp.type;
-                        step = 2;
-                        shortLog.setText(L10n.STEP_3_DEF);
-                    } else if (step == 2) {
-                        player.defensePoints.add(bp.type);
-                        step = 3;
-                        shortLog.setText(L10n.STEP_4_DEF);
-                    } else if (step == 3 && !player.defensePoints.contains(bp.type)) {
-                        player.defensePoints.add(bp.type);
-                        repaint();
-                        SwingUtilities.invokeLater(() -> {
-                            try { Thread.sleep(50); } catch (Exception ex) {}
-                            runTurn();
-                            repaint();
-                        });
-                    }
-                    return;
-                }
-        }
+        player.lastAtk = null;
+        player.lastEva = null;
+        player.lastDef.clear();
+        player.lastReceivedHit = null;
+        ai.lastHitWasGuarded = false;
+        ai.lastHitWasEvaded = false;
+        ai.lastAtk = null;
+        ai.lastEva = null;
+        ai.lastDef.clear();
     }
 
     private void drawCombatant(Graphics2D g, Combatant c, boolean isPlayerSide) {
@@ -194,7 +191,9 @@ public class TacticalArena extends JFrame {
         g.draw(new RoundRectangle2D.Double(hbX, hbY, hbW, hbH, 12, 12));
 
         g.setFont(new Font("Segoe UI Semibold", Font.PLAIN, (int) (22 * s)));
+        g.setColor(Color.WHITE);
         g.drawString(c.name, (int) hbX, (int) hbY - (int) (15 * GameSettings.scaleY));
+
         g.setFont(new Font("Segoe UI", Font.PLAIN, (int) (17 * s)));
         g.setColor(new Color(200, 205, 220));
         int dy = (int) (28 * GameSettings.scaleY);
