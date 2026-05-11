@@ -6,9 +6,10 @@ import java.awt.event.*;
 public class StartMenu extends JDialog {
     private JTextField nameField;
     private JComboBox<String> langBox;
+    private JLabel title, subtitle, labelName, labelLang;
+    private JButton startBtn;
     private boolean started = false;
 
-    // Сучасна палітра кольорів
     private final Color COLOR_BG = new Color(25, 27, 33);
     private final Color COLOR_INPUT = new Color(45, 48, 56);
     private final Color COLOR_ACCENT = new Color(70, 130, 255);
@@ -16,71 +17,72 @@ public class StartMenu extends JDialog {
     private final Color COLOR_TEXT_DIM = new Color(160, 165, 175);
 
     public StartMenu() {
-        setTitle("Tactical Arena - Setup");
+        setTitle("Setup");
         setModal(true);
-        setSize(400, 500);
+        setSize(400, 520);
         setLocationRelativeTo(null);
         setResizable(false);
         
-        // Головний контейнер
         JPanel root = new JPanel();
         root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
         root.setBackground(COLOR_BG);
         root.setBorder(new EmptyBorder(40, 40, 40, 40));
 
-        // --- ЗАГОЛОВОК ---
-        JLabel title = new JLabel("TACTICAL ARENA");
+        // Ініціалізація компонентів
+        title = new JLabel(L10n.GAME_TITLE);
         title.setFont(new Font("Segoe UI", Font.BOLD, 28));
         title.setForeground(COLOR_ACCENT);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel subtitle = new JLabel("Enter the battlefield");
+        subtitle = new JLabel(L10n.L_SUBTITLE);
         subtitle.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         subtitle.setForeground(COLOR_TEXT_DIM);
         subtitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // --- ПОЛЕ ІМЕНІ ---
-        JLabel labelName = createFieldLabel("PLAYER NAME");
+        labelName = createFieldLabel(L10n.L_NAME);
         nameField = new JTextField("Warrior");
         styleInputField(nameField);
 
-        // --- ВИБІР МОВИ ---
-        JLabel labelLang = createFieldLabel("LANGUAGE");
+        labelLang = createFieldLabel(L10n.L_LANG);
         langBox = new JComboBox<>(new String[]{"Українська", "English", "Español"});
         styleComboBox(langBox);
+        
+        // --- МИТТЄВА ЗМІНА МОВИ ---
+        langBox.addActionListener(e -> {
+            L10n.setLocale(langBox.getSelectedIndex());
+            refreshTexts();
+        });
 
-        // --- КНОПКА ЗАПУСКУ ---
-        JButton startBtn = new JButton("START GAME");
+        startBtn = new JButton(L10n.L_START);
         stylePrimaryButton(startBtn);
         startBtn.addActionListener(e -> {
             GameSettings.playerName = nameField.getText().trim();
             if (GameSettings.playerName.isEmpty()) GameSettings.playerName = "Hero";
-            L10n.setLocale(langBox.getSelectedIndex());
             started = true;
             dispose();
         });
 
-        // Додавання елементів з відступами
+        // Комнування
         root.add(title);
         root.add(Box.createRigidArea(new Dimension(0, 5)));
         root.add(subtitle);
         root.add(Box.createRigidArea(new Dimension(0, 50)));
-
         root.add(labelName);
         root.add(Box.createRigidArea(new Dimension(0, 8)));
         root.add(nameField);
         root.add(Box.createRigidArea(new Dimension(0, 30)));
-
         root.add(labelLang);
         root.add(Box.createRigidArea(new Dimension(0, 8)));
         root.add(langBox);
-
-        root.add(Box.createVerticalGlue()); // Штовхає кнопку вниз
+        root.add(Box.createVerticalGlue());
         root.add(startBtn);
 
         add(root);
-        
-        // Гарантуємо, що вікно закриється коректно при натисканні на хрестик
+
+        // Початкове встановлення текстів
+        L10n.setLocale(0);
+        refreshTexts();
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -89,6 +91,17 @@ public class StartMenu extends JDialog {
         });
 
         setVisible(true);
+    }
+
+    /**
+     * Оновлює всі текстові компоненти меню згідно з поточною локаллю
+     */
+    private void refreshTexts() {
+        title.setText(L10n.GAME_TITLE);
+        subtitle.setText(L10n.L_SUBTITLE);
+        labelName.setText(L10n.L_NAME);
+        labelLang.setText(L10n.L_LANG);
+        startBtn.setText(L10n.L_START);
     }
 
     private JLabel createFieldLabel(String text) {
@@ -117,7 +130,6 @@ public class StartMenu extends JDialog {
         combo.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         combo.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
         combo.setFocusable(false);
-        // Прибираємо стандартну рамку
         combo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
 
@@ -130,15 +142,7 @@ public class StartMenu extends JDialog {
         btn.setAlignmentX(Component.CENTER_ALIGNMENT);
         btn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 55));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        // Ефект наведення
-        btn.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) { btn.setBackground(COLOR_ACCENT.brighter()); }
-            public void mouseExited(MouseEvent e) { btn.setBackground(COLOR_ACCENT); }
-        });
     }
 
-    public boolean isStarted() {
-        return started;
-    }
+    public boolean isStarted() { return started; }
 }

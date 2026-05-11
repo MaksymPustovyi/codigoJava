@@ -4,7 +4,7 @@ class L10n {
     public static String BP_HEAD, BP_CHEST, BP_ABDOMEN, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG;
     public static String LOG_ROUND, LOG_BLEED_LOST, LOG_ACTION, LOG_MISS, LOG_EVADE, LOG_HIT, LOG_GUARD;
     public static String CONS_ACCURACY, CONS_EVASION, CONS_POWER, CONS_BLEED, SHORT_HIT, SHORT_GUARD, SHORT_MISS, SHORT_EVADE, WIN, LOSS;
-    public static String L_START, L_NAME, L_LANG, L_RULES_TITLE;
+    public static String L_START, L_NAME, L_LANG, L_RULES_TITLE, L_SUBTITLE;
 
     public static void setLocale(int langIndex) {
         if (langIndex == 0) { // Українська
@@ -16,6 +16,9 @@ class L10n {
             STEP_2_EVA = "Крок 2: Оберіть точку УХИЛЕННЯ (🏃)";
             STEP_3_DEF = "Крок 3: Перший ЗАХИСТ (🛡️)"; 
             STEP_4_DEF = "Крок 4: Другий ЗАХИСТ (🛡️)";
+
+            L_START = "ПОЧАТИ ГРУ"; L_NAME = "ІМ'Я ГРАВЦЯ"; L_LANG = "МОВА";
+            L_SUBTITLE = "Готуйся до бою";
             
             BP_HEAD = "Голова"; BP_CHEST = "Груди"; BP_ABDOMEN = "Живіт";
             BP_L_ARM = "Л. Рука"; BP_R_ARM = "П. Рука"; BP_L_LEG = "Л. Нога"; BP_R_LEG = "П. Нога";
@@ -50,6 +53,8 @@ class L10n {
             STEP_3_DEF = "Step 3: First DEFENSE (🛡️)"; STEP_4_DEF = "Step 4: Second DEFENSE (🛡️)";
             BP_HEAD = "Head"; BP_CHEST = "Chest"; BP_ABDOMEN = "Abdomen";
             BP_L_ARM = "L. Arm"; BP_R_ARM = "R. Arm"; BP_L_LEG = "L. Leg"; BP_R_LEG = "R. Leg";
+            L_START = "START GAME"; L_NAME = "PLAYER NAME"; L_LANG = "LANGUAGE";
+            L_SUBTITLE = "Enter the battlefield";
             
             // LOG without emojis
             LOG_ROUND = "\n=== ROUND №%d ===\n"; 
@@ -74,6 +79,9 @@ class L10n {
             STEP_3_DEF = "Paso 3: Primera DEFENSA (🛡️)"; STEP_4_DEF = "Paso 4: Segunda DEFENSA (🛡️)";
             BP_HEAD = "Cabeza"; BP_CHEST = "Pecho"; BP_ABDOMEN = "Abdomen";
             BP_L_ARM = "Brazo I."; BP_R_ARM = "Brazo D."; BP_L_LEG = "Pierna I."; BP_R_LEG = "Pierna D.";
+            
+            L_START = "JUGAR"; L_NAME = "NOMBRE DEL JUGADOR"; L_LANG = "IDIOMA";
+            L_SUBTITLE = "Entra al campo de batalla";
             
             // LOG without emojis
             LOG_ROUND = "\n=== RONDA №%d ===\n"; 
