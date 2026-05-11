@@ -8,6 +8,7 @@ class L10n {
     public static String L_START, L_NAME, L_LANG, L_SUBTITLE;
     public static String L_RULES_TITLE, L_RULES_DONE, L_RULE_1, L_RULE_2, L_RULE_3, L_RULE_4;
     public static String LOG_TITLE;
+    public static String L_SETTINGS, L_RES_LABEL, L_SAVE;
 
     public static void setLocale(int langIndex) {
         if (langIndex == 0) { // Українська
@@ -57,6 +58,10 @@ class L10n {
             
             L_RULES_TITLE = "Правила Арени:";
 
+            L_SETTINGS = "НАЛАШТУВАННЯ";
+            L_RES_LABEL = "РОЗДІЛЬНА ЗДАТНІСТЬ";
+            L_SAVE = "ЗБЕРЕГТИ";
+
             // Залишаємо емодзі у верхньому короткому лозі
             SHORT_HIT = "%s -> %s: -%d";
             SHORT_GUARD = "%s -> %s (🛡️): -%d";
@@ -71,6 +76,7 @@ class L10n {
             L_RULE_4 = "<html><b>Кровотеча:</b> Влучання в тулуб викликає кровотечу, яка забирає HP щоходу. Максимальна кровотеча — 10% від твого поточного здоров'я.</html>";
 
             LOG_TITLE = "ЖУРНАЛ БОЮ";
+            
 
         } else if (langIndex == 1) { // English
             PLAYER_NAME = "Player";
@@ -113,6 +119,11 @@ class L10n {
             LOSS = "DEFEAT!";
             
             L_RULES_TITLE = "Rules:";
+
+            L_SETTINGS = "SETTINGS";
+            L_RES_LABEL = "RESOLUTION";
+            L_SAVE = "SAVE";
+
             SHORT_HIT = "%s -> %s: -%d";
             SHORT_GUARD = "%s -> %s (🛡️): -%d";
             SHORT_MISS = "%s: MISS";
@@ -169,6 +180,11 @@ class L10n {
             LOSS = "¡DERROTA!";
             
             L_RULES_TITLE = "Reglas:";
+
+            L_SETTINGS = "AJUSTES";
+            L_RES_LABEL = "RESOLUCIÓN";
+            L_SAVE = "GUARDAR";
+            
             SHORT_HIT = "%s -> %s: -%d";
             SHORT_GUARD = "%s -> %s (🛡️): -%d";
             SHORT_MISS = "%s: FALLÓ";
