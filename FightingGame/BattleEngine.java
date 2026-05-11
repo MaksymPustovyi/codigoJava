@@ -1,97 +1,109 @@
-import javax.swing.*;
-
-class BattleEngine {
+public class BattleEngine {
     private int round = 1;
 
-    public String processAttack(Combatant atk, Combatant def, boolean isPlayerAtk, JTextArea log) {
-        String actionBase = String.format(L10n.LOG_ACTION, atk.name, atk.attackTarget.getName());
+    public String processAttack(Combatant atk, Combatant def, boolean isPlayerAtk, ArenaUI ui) {
+        String targetName = (atk.attackTarget != null) ? atk.attackTarget.getName() : "???";
         float accB = def.getAccuracy(), evaB = def.getEvasionChance(), pwrB = def.getPower();
 
-        // --- ОНОВЛЕНА ГІЛКА УХИЛЕННЯ ---
-        if (def.evasionPoint == atk.attackTarget) {
-            // Перевіряємо математичний шанс (стан ніг)
+        // Прапорець для відстеження невдалого ухилення
+        boolean evasionGuessedButFailed = false;
+
+        // 1. ПЕРЕВІРКА ТОЧНОСТІ АТАКУЮЧОГО
+        if (Math.random() > atk.getAccuracy()) {
+            ui.appendToLog(safeFormat(L10n.LOG_ACTION, atk.name, targetName) + L10n.LOG_MISS);
+            return safeFormat(L10n.SHORT_MISS, atk.name);
+        }
+
+        // 2. ПЕРЕВІРКА УХИЛЕННЯ ЗАХИСНИКА
+        if (def.evasionPoint == atk.attackTarget && atk.attackTarget != null) {
             if (Math.random() < def.getEvasionChance()) {
-                if (isPlayerAtk) def.lastHitWasEvaded = true;
-                log.append(actionBase + L10n.LOG_EVADE);
-                ensureNewLine(log, L10n.LOG_EVADE);
-                log.append("\n"); 
-                return String.format(L10n.SHORT_EVADE, atk.name);
+                if (isPlayerAtk)
+                    def.lastHitWasEvaded = true;
+                ui.appendToLog(safeFormat(L10n.LOG_ACTION, atk.name, targetName) + L10n.LOG_EVADE);
+                return safeFormat(L10n.SHORT_EVADE, atk.name);
             } else {
-                // Якщо вгадав точку, але шанс не спрацював (ноги пошкоджені)
-                log.append(" > " + def.name + " вгадав напрямок, але не встиг ухилитися!\n");
+                // ФІКС: Просто запам'ятовуємо, що ухилення не вдалося
+                evasionGuessedButFailed = true;
             }
         }
-        // --------------------------------
 
-        // 2. Точність (промах)
-        if (Math.random() > atk.getAccuracy()) {
-            log.append(actionBase + L10n.LOG_MISS);
-            ensureNewLine(log, L10n.LOG_MISS);
-            log.append("\n");
-            return String.format(L10n.SHORT_MISS, atk.name);
-        }
-
-        // 3. Розрахунок урону (якщо не ухилився і не промахнувся)
+        // 3. ВЛУЧАННЯ ТА РОЗРАХУНОК УРОНУ
         float baseDmg = 30f * (atk.getPower() / 100f);
         boolean guarded = def.defensePoints.contains(atk.attackTarget);
-        if (guarded && isPlayerAtk) def.lastHitWasGuarded = true;
+        if (guarded && isPlayerAtk)
+            def.lastHitWasGuarded = true;
 
         float fDmg = guarded ? baseDmg * 0.8f : baseDmg;
         def.globalHp -= fDmg;
 
-        BodyPart target = def.parts.get(atk.attackTarget);
-        target.hp = Math.max(0, target.hp - baseDmg * 0.2f);
+        if (atk.attackTarget != null) {
+            BodyPart target = def.parts.get(atk.attackTarget);
+            target.hp = Math.max(0, target.hp - fDmg * 0.2f);
 
-        float bleedAdded = 0;
-        if (atk.attackTarget == BodyPartType.CHEST || atk.attackTarget == BodyPartType.ABDOMEN) {
-            bleedAdded = fDmg * 0.20f;
-            target.bleeding += bleedAdded;
+            float bleedAdded = 0;
+            if (atk.attackTarget == BodyPartType.CHEST || atk.attackTarget == BodyPartType.ABDOMEN) {
+                bleedAdded = fDmg * 0.20f;
+                target.bleeding += bleedAdded;
+            }
+
+            // ПРЯМИЙ ЗАПИС В ЛОГ (основний рядок влучання)
+            ui.appendToLog(safeFormat(L10n.LOG_HIT, atk.name, targetName, (guarded ? L10n.LOG_GUARD : ""), (int) fDmg));
+
+            // ФІКС: Виводимо повідомлення про невдале ухилення ВІДРАЗУ ПІСЛЯ рядка влучання
+            if (evasionGuessedButFailed) {
+                ui.appendToLog(L10n.LOG_EVADE_FAIL);
+            }
+
+            if (bleedAdded > 0)
+                ui.appendToLog(safeFormat(L10n.CONS_BLEED, bleedAdded));
         }
 
-        String hitLine = actionBase + (guarded ? L10n.LOG_GUARD : "") + String.format(L10n.LOG_HIT, "", (int) fDmg);
-        log.append(hitLine);
-        ensureNewLine(log, hitLine);
+        // Логування наслідків (точність, сила тощо)
+        logConsequence(ui, L10n.CONS_ACCURACY, accB, def.getAccuracy(), 100);
+        logConsequence(ui, L10n.CONS_EVASION, evaB, def.getEvasionChance(), 100);
+        logConsequence(ui, L10n.CONS_POWER, pwrB, def.getPower(), 1);
 
-        if (bleedAdded > 0 && L10n.CONS_BLEED != null) {
-            log.append(String.format(L10n.CONS_BLEED, def.name, bleedAdded));
-        }
-        
-        logConsequence(log, def.name, L10n.CONS_ACCURACY, accB, def.getAccuracy(), 100);
-        logConsequence(log, def.name, L10n.CONS_EVASION, evaB, def.getEvasionChance(), 100);
-        logConsequence(log, def.name, L10n.CONS_POWER, pwrB, def.getPower(), 1);
-
-        log.append("\n");
-
-        return guarded ? String.format(L10n.SHORT_GUARD, atk.name, atk.attackTarget.getName(), (int) fDmg)
-                : String.format(L10n.SHORT_HIT, atk.name, atk.attackTarget.getName(), (int) fDmg);
+        return guarded ? safeFormat(L10n.SHORT_GUARD, atk.name, targetName, (int) fDmg)
+                : safeFormat(L10n.SHORT_HIT, atk.name, targetName, (int) fDmg);
     }
 
-    // Допоміжний метод для перевірки, чи закінчується текст переносом рядка
-    private void ensureNewLine(JTextArea log, String lastText) {
-        if (lastText != null && !lastText.endsWith("\n")) {
-            log.append("\n");
+    // ДОПОМІЖНИЙ МЕТОД ДЛЯ ЗАХИСТУ ВІД NULL
+    private String safeFormat(String pattern, Object... args) {
+        if (pattern == null || pattern.isEmpty())
+            return "";
+        try {
+            return String.format(pattern, args);
+        } catch (Exception e) {
+            return "Format Error";
         }
     }
 
-    private void logConsequence(JTextArea log, String name, String pattern, float before, float after, int mult) {
-        if (pattern != null && before > after + 0.001) {
-            log.append(String.format(pattern, name, (before - after) * mult));
-            // Шаблони наслідків (CONS_...) повинні мати \n всередині L10n
+    private void logConsequence(ArenaUI ui, String pattern, float before, float after, int mult) {
+        if (pattern != null && !pattern.isEmpty() && before > (after + 0.001)) {
+            ui.appendToLog(safeFormat(pattern, (before - after) * mult));
         }
     }
 
-    public void applyBleeding(Combatant c, JTextArea log) {
+    public void applyBleeding(Combatant c, ArenaUI ui) {
         float bleed = c.getBleedSum();
         float cap = c.globalHp * 0.10f;
         float actual = Math.min(bleed, cap);
-        if (actual > 0.5 && L10n.LOG_BLEED_LOST != null) {
+        if (actual > 0.5) {
             c.globalHp -= actual;
-            log.append(String.format(L10n.LOG_BLEED_LOST, c.name, (int) actual));
+            ui.appendToLog(safeFormat(L10n.LOG_BLEED_LOST, c.name, (int) actual));
             c.parts.values().forEach(p -> p.bleeding *= 0.5f);
-            log.append("\n"); // Відступ після блоку кровотечі
         }
     }
 
-    public int getRound() { return round; }
-    public void incrementRound() { round++; }
+    public void logRoundHeader(ArenaUI ui) {
+        ui.appendToLog(safeFormat(L10n.LOG_ROUND, round));
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void incrementRound() {
+        round++;
+    }
 }

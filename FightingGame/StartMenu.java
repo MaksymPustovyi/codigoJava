@@ -68,15 +68,23 @@ public class StartMenu extends JDialog {
         styleComboBox(langBox);
         
         langBox.addActionListener(e -> {
+            // Також зберігаємо ім'я при зміні мови
+            GameSettings.playerName = nameField.getText().trim();
+            
             L10n.setLocale(langBox.getSelectedIndex());
             refreshTexts();
         });
 
         // --- BUTTONS ---
+
+        // --- КНОПКА НАЛАШТУВАНЬ ---
         settingsBtn = new BattleButton(L10n.L_SETTINGS, false);
         settingsBtn.addActionListener(e -> {
+            // ФІКС: Зберігаємо введене ім'я в налаштування перед перемальовуванням
+            GameSettings.playerName = nameField.getText().trim();
+            
             new SettingsMenu(this);
-            rebuildUI();
+            rebuildUI(); // Тепер при створенні нового nameField воно візьме збережене ім'я
         });
 
         startBtn = new BattleButton(L10n.L_START, true);

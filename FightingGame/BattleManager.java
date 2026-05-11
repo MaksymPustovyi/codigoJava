@@ -8,6 +8,7 @@ public class BattleManager {
     private ArenaUI ui;
     private BattlefieldPanel panel;
     private int step = 0;
+    private boolean isProcessing = false;
 
     public BattleManager(Combatant player, Combatant ai, BattleEngine engine, ArenaUI ui, BattlefieldPanel panel) {
         this.player = player;
@@ -19,30 +20,29 @@ public class BattleManager {
     }
 
     public void handleMouseClick(Point p) {
-        if (step == 0) {
+        if (isProcessing) return;
+
+        if (step == 0) { // Атака
             for (BodyPart bp : ai.parts.values()) if (bp.bounds.contains(p)) {
                 resetVisuals();
-                player.attackTarget = bp.type; step = 1;
+                player.attackTarget = bp.type;
+                step = 1;
                 ui.shortLog.setText("<html><center>" + L10n.STEP_2_EVA + "</center></html>");
                 break;
             }
-        } else {
+        } else { // Ухилення та Захист
             for (BodyPart bp : player.parts.values()) if (bp.bounds.contains(p)) {
                 if (step == 1) {
-                    player.evasionPoint = bp.type; step = 2;
+                    player.evasionPoint = bp.type;
+                    step = 2;
                     ui.shortLog.setText("<html><center>" + L10n.STEP_3_DEF + "</center></html>");
                 } else if (step == 2) {
-                    player.defensePoints.add(bp.type); step = 3;
+                    player.defensePoints.add(bp.type);
+                    step = 3;
                     ui.shortLog.setText("<html><center>" + L10n.STEP_4_DEF + "</center></html>");
                 } else if (step == 3 && !player.defensePoints.contains(bp.type)) {
                     player.defensePoints.add(bp.type);
-                    panel.repaint();
-                    // Запуск розрахунку
-                    SwingUtilities.invokeLater(() -> {
-                        try { Thread.sleep(50); } catch (Exception ignored) {}
-                        runTurn();
-                        panel.repaint();
-                    });
+                    executeTurnSequence();
                 }
                 break;
             }
@@ -50,38 +50,64 @@ public class BattleManager {
         panel.setStep(step);
     }
 
+    private void executeTurnSequence() {
+        isProcessing = true;
+        panel.setStep(step);
+        panel.repaint();
+        
+        // Маленька затримка, щоб гравець побачив свій вибір
+        Timer timer = new Timer(300, e -> {
+            runTurn();
+            isProcessing = false;
+        });
+        timer.setRepeats(false);
+        timer.start();
+    }
+
     private void runTurn() {
         aiLogic.recordPlayerAttack(player.attackTarget);
         aiLogic.makeDecision(ai);
 
-        ui.detailedLog.append(String.format(L10n.LOG_ROUND, engine.getRound()));
-        engine.applyBleeding(player, ui.detailedLog);
-        engine.applyBleeding(ai, ui.detailedLog);
+        engine.logRoundHeader(ui);
+        engine.applyBleeding(player, ui);
+        engine.applyBleeding(ai, ui);
 
-        String pRes = engine.processAttack(player, ai, true, ui.detailedLog);
-        String aRes = engine.processAttack(ai, player, false, ui.detailedLog);
+        String pRes = engine.processAttack(player, ai, true, ui);
+        String aRes = engine.processAttack(ai, player, false, ui);
 
         player.lastReceivedHit = ai.attackTarget;
         ui.updateStatus(pRes, aRes);
 
-        saveChoices();
+        saveChoicesAndReset();
         engine.incrementRound();
-        step = 0;
+        
+        step = 0; // ПОВЕРНЕННЯ ДО ПОЧАТКУ
         panel.setStep(step);
-        ui.detailedLog.setCaretPosition(ui.detailedLog.getDocument().getLength());
+        
+        // ВАЖЛИВО: Оновлюємо заголовок на Крок 1
+        ui.shortLog.setText("<html><center>" + L10n.STEP_1_ATK + "</center></html>");
+        
+        panel.repaint();
 
-        checkGameOver();
+        if (player.globalHp <= 0 || ai.globalHp <= 0) {
+            checkGameOver();
+        }
     }
 
-    private void saveChoices() {
+    private void saveChoicesAndReset() {
         player.lastAtk = player.attackTarget;
         player.lastEva = player.evasionPoint;
-        player.lastDef.clear(); player.lastDef.addAll(player.defensePoints);
+        player.lastDef.clear();
+        player.lastDef.addAll(player.defensePoints);
+
         ai.lastAtk = ai.attackTarget;
         ai.lastEva = ai.evasionPoint;
-        ai.lastDef.clear(); ai.lastDef.addAll(ai.defensePoints);
-        
-        player.attackTarget = null; player.evasionPoint = null; player.defensePoints.clear();
+        ai.lastDef.clear();
+        ai.lastDef.addAll(ai.defensePoints);
+
+        player.attackTarget = null;
+        player.evasionPoint = null;
+        player.defensePoints.clear();
         ai.defensePoints.clear();
     }
 
@@ -93,8 +119,21 @@ public class BattleManager {
 
     private void checkGameOver() {
         if (player.globalHp <= 0 || ai.globalHp <= 0) {
-            JOptionPane.showMessageDialog(null, player.globalHp > 0 ? L10n.WIN : L10n.LOSS);
-            System.exit(0);
+            String msg = player.globalHp > 0 ? L10n.WIN : L10n.LOSS;
+            
+            // Отримуємо посилання на головне вікно
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(panel);
+            
+            // Викликаємо кастомне вікно
+            GameOverDialog dialog = new GameOverDialog(mainFrame, msg);
+            
+            if (dialog.isRestartRequested()) {
+                // Якщо обрано "Новий бій", закриваємо поточне вікно гри.
+                // Оскільки в TacticalArena працює AppCycle, програма автоматично повернеться в меню.
+                mainFrame.dispose();
+            } else {
+                System.exit(0);
+            }
         }
     }
 }

@@ -1,13 +1,14 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ArenaUI extends JPanel {
-    public JTextArea detailedLog;
+public class ArenaUI {
+    public JEditorPane detailedLog;
+    private List<String> logEntries = new ArrayList<>();
     public JLabel shortLog;
-    public JPanel gameSurface;
-    public JButton exitBtn; // Кнопка виходу
+    public JPanel mainContainer;
 
     private final Color BG_COLOR = new Color(20, 22, 27);
     private final Color PANEL_BG = new Color(32, 34, 40);
@@ -15,69 +16,68 @@ public class ArenaUI extends JPanel {
     private final Color BORDER_COLOR = new Color(50, 54, 62);
 
     public ArenaUI(JFrame frame) {
-        setLayout(new BorderLayout());
-        setBackground(BG_COLOR);
+        mainContainer = new JPanel(new BorderLayout());
+        mainContainer.setBackground(BG_COLOR);
 
-        // --- ВЕРХНІЙ СТАТУС-БАР (HEADER) ---
+        // --- 1. ВЕРХНІЙ СТАТУС-БАР (NORTH) ---
         JPanel headerPanel = new JPanel(new BorderLayout());
         headerPanel.setBackground(PANEL_BG);
-        headerPanel.setPreferredSize(new Dimension(0, (int) (110 * GameSettings.scaleY)));
+        headerPanel.setPreferredSize(new Dimension(0, GameSettings.s(110)));
         headerPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, BORDER_COLOR));
 
-        // Центральний текст
-        shortLog = new JLabel("<html><center>READY FOR BATTLE</center></html>", SwingConstants.CENTER);
-        shortLog.setFont(new Font("Segoe UI", Font.BOLD, (int) (20 * GameSettings.scale)));
+        // ЛІВА ЧАСТИНА (Порожня розпірка для ідеальної симетрії центру)
+        JPanel leftSpacer = new JPanel();
+        leftSpacer.setOpaque(false);
+        leftSpacer.setPreferredSize(new Dimension(GameSettings.s(200), 0));
+        headerPanel.add(leftSpacer, BorderLayout.WEST);
+
+        // ЦЕНТР (Текст статусу ходу)
+        shortLog = new JLabel("<html><center>" + L10n.STEP_1_ATK + "</center></html>", SwingConstants.CENTER);
+        shortLog.setFont(GameSettings.getScaledFont("Segoe UI", Font.BOLD, 20));
         shortLog.setForeground(ACCENT_BLUE);
         headerPanel.add(shortLog, BorderLayout.CENTER);
 
-        // Кнопка виходу (справа в хедері)
-        exitBtn = createVectorExitButton(frame);
-        JPanel exitWrapper = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 15));
-        exitWrapper.setOpaque(false);
-        exitWrapper.add(exitBtn);
-        headerPanel.add(exitWrapper, BorderLayout.EAST);
+        // ПРАВА ЧАСТИНА (Єдина кнопка виходу - Хрестик)
+        JButton exitBtn = createVectorExitButton(frame);
+        JPanel rightWrapper = new JPanel(new FlowLayout(FlowLayout.RIGHT, 25, 38)); // Відступи для хрестика
+        rightWrapper.setOpaque(false);
+        rightWrapper.setPreferredSize(new Dimension(GameSettings.s(200), 0));
+        rightWrapper.add(exitBtn);
+        headerPanel.add(rightWrapper, BorderLayout.EAST);
 
-        // Порожній блок зліва для балансу (симетрії тексту)
-        JPanel leftSpacer = new JPanel();
-        leftSpacer.setOpaque(false);
-        leftSpacer.setPreferredSize(new Dimension(60, 0));
-        headerPanel.add(leftSpacer, BorderLayout.WEST);
+        mainContainer.add(headerPanel, BorderLayout.NORTH);
 
-        frame.add(headerPanel, BorderLayout.NORTH);
-
-        // --- ПРАВА ПАНЕЛЬ (DETAILED LOG) ---
+        // --- 2. ПРАВА ПАНЕЛЬ (EAST) ---
         JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.setBackground(PANEL_BG);
-        rightPanel.setPreferredSize(new Dimension((int) (450 * GameSettings.scaleX), 0));
+        rightPanel.setPreferredSize(new Dimension(GameSettings.s(450), 0));
         rightPanel.setBorder(BorderFactory.createMatteBorder(0, 2, 0, 0, BORDER_COLOR));
 
         JLabel logTitleLabel = new JLabel(L10n.LOG_TITLE, SwingConstants.LEFT);
-        logTitleLabel.setFont(new Font("Segoe UI", Font.BOLD, (int) (18 * GameSettings.scale)));
-        logTitleLabel.setForeground(new Color(150, 160, 180)); // Приємний сіро-блакитний колір
-        logTitleLabel.setBorder(new EmptyBorder(15, 20, 10, 20)); // Відступи від країв
+        logTitleLabel.setFont(GameSettings.getScaledFont("Segoe UI", Font.BOLD, 18));
+        logTitleLabel.setForeground(new Color(150, 160, 180));
+        logTitleLabel.setBorder(new EmptyBorder(15, 20, 10, 20));
         rightPanel.add(logTitleLabel, BorderLayout.NORTH);
 
-        detailedLog = new JTextArea();
+        detailedLog = new JEditorPane("text/html", "");
         detailedLog.setEditable(false);
         detailedLog.setBackground(new Color(25, 27, 33));
-        detailedLog.setForeground(new Color(200, 205, 215));
-        detailedLog.setFont(new Font("Segoe UI Semibold", Font.PLAIN, (int) (15 * GameSettings.scale)));
-        detailedLog.setLineWrap(true);
-        detailedLog.setWrapStyleWord(true);
-        detailedLog.setMargin(new Insets(10, 20, 20, 20)); // Трохи зменшили верхній відступ, бо тепер є заголовок
-
+        
         JScrollPane scroll = new JScrollPane(detailedLog);
         scroll.setBorder(null);
-        scroll.getVerticalScrollBar().setUnitIncrement(16);
-        scroll.setOpaque(false);
-        scroll.getViewport().setOpaque(false);
-
         rightPanel.add(scroll, BorderLayout.CENTER);
-        frame.add(rightPanel, BorderLayout.EAST);
+        mainContainer.add(rightPanel, BorderLayout.EAST);
 
-        // --- ПОВЕРХНЯ БОЮ ---
-        gameSurface = new JPanel();
-        frame.add(gameSurface, BorderLayout.CENTER);
+        frame.getContentPane().add(mainContainer);
+    }
+
+    public void appendToLog(String html) {
+        logEntries.add(html);
+        StringBuilder sb = new StringBuilder("<html><body style='font-family:Segoe UI; font-size:12px; color:#CCCCCC;'>");
+        for (String s : logEntries) sb.append(s);
+        sb.append("</body></html>");
+        detailedLog.setText(sb.toString());
+        detailedLog.setCaretPosition(detailedLog.getDocument().getLength());
     }
 
     private JButton createVectorExitButton(JFrame frame) {
@@ -86,26 +86,29 @@ public class ArenaUI extends JPanel {
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-                if (getModel().isRollover())
-                    g2.setColor(Color.RED);
-                else
-                    g2.setColor(new Color(160, 165, 175));
-
+                
+                // Зміна кольору при наведенні
+                if (getModel().isRollover()) g2.setColor(new Color(255, 80, 80));
+                else g2.setColor(new Color(160, 165, 175));
+                
                 g2.setStroke(new BasicStroke(2.5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-                int p = 8;
+                int p = 6; // Внутрішній відступ хрестика
                 int s = getWidth() - p * 2;
                 g2.drawLine(p, p, p + s, p + s);
                 g2.drawLine(p, p + s, p + s, p);
                 g2.dispose();
             }
         };
-        btn.setPreferredSize(new Dimension(30, 30));
+        btn.setPreferredSize(new Dimension(28, 28));
         btn.setContentAreaFilled(false);
         btn.setBorderPainted(false);
         btn.setFocusPainted(false);
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn.addActionListener(e -> frame.dispose()); 
+        
+        btn.addActionListener(e -> {
+            ExitConfirmDialog dialog = new ExitConfirmDialog(frame);
+            if (dialog.isConfirmed()) frame.dispose();
+        });
         return btn;
     }
 
@@ -114,12 +117,11 @@ public class ArenaUI extends JPanel {
     }
 
     public void updateStatus(String pRes, String aRes) {
-        String hexAccent = colorToHex(ACCENT_BLUE);
-        shortLog.setText("<html><body style='width: 1200px; text-align: center;'>" +
-                "<p style='margin: 0; padding: 0; color: " + hexAccent
-                + "; font-weight: bold; font-size: 1.1em; white-space: nowrap;'>" + pRes + "</p>" +
-                "<p style='margin: 5px 0 0 0; padding: 0; color: #BBBBBB; font-weight: normal; white-space: nowrap;'>"
-                + aRes + "</p>" +
+        String hex = colorToHex(ACCENT_BLUE);
+        // Зменшили ширину body, щоб текст не розсував панель
+        shortLog.setText("<html><body style='text-align: center; width: 450px;'>" +
+                "<div style='color: " + hex + "; font-weight: bold; white-space: nowrap;'>" + pRes + "</div>" +
+                "<div style='color: #AAAAAA; white-space: nowrap;'>" + aRes + "</div>" +
                 "</body></html>");
     }
 }
