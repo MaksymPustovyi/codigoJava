@@ -71,7 +71,7 @@ public class TacticalArena extends JFrame {
     }
 
     public static void main(String[] args) {
-        L10n.setLocale(0);
+        L10n.setLocale(1);
         SwingUtilities.invokeLater(TacticalArena::startAppCycle);
     }
 }
